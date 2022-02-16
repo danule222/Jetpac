@@ -21,7 +21,7 @@
 // Screens
 
 // Functions
-
+#include "./functions/enemy.cc"
 // ZX Spectrum res.: 256×192 pixels
 int WIDTH = 768, HEIGHT = 576;
 
@@ -34,14 +34,15 @@ int esat::main(int argc, char **argv)
 
 	esat::WindowInit(WIDTH, HEIGHT);
 	WindowSetMouseVisibility(true);
-
+	EnemyStart();
 	while (esat::WindowIsOpened() &&
 				 !esat::IsSpecialKeyDown(esat::kSpecialKey_Escape))
 	{
 		last_time = esat::Time();
 		esat::DrawBegin();
-		esat::DrawClear(0, 0, 0);
-
+		esat::DrawClear(255, 255, 255);
+		EnemyUpdate();
+		EnemyDraw();
 		esat::DrawEnd();
 
 		// Control FPS
@@ -53,6 +54,6 @@ int esat::main(int argc, char **argv)
 	}
 
 	esat::WindowDestroy();
-
+	EnemyEnd();
 	return 0;
 }
