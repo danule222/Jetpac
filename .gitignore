@@ -50,4 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Custom
+*.bat
+*.ini
 .vscode/*
+.vs/*
