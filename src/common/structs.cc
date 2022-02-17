@@ -4,27 +4,22 @@
  * @brief Estructuras usadas en el juego.
  */
 
-#pragma region Matematicas
+#pragma region General
 
-struct Vec2
+struct Color
 {
-  float x, y;
+  unsigned char r, g, b, alpha = 255;
 };
 
-struct Vec3
-{
-  float x, y, z;
-};
-
-#pragma endregion Matematicas
+#pragma endregion General
 
 #pragma region Enemigos
 
 struct Enemy
 {
-  Vec2 pos;
-  Vec2 dir;
-  Vec3 color;
+  esat::Vec2 pos;
+  esat::Vec2 dir;
+  esat::Vec3 color;
   float speed;
   bool alive;
   bool explode;
@@ -33,13 +28,20 @@ struct Enemy
   int animation_counter;
 };
 
+struct EnemNode
+{
+  int index;
+  Enemy enem;
+  EnemNode *next;
+};
+
 #pragma endregion Enemigos
 
 #pragma region Nave
 
-struct powerups
+struct PowerUp
 {
-  Vec2 pos;
+  esat::Vec2 pos;
   float gravedad;
   float contador;
 };
