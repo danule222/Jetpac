@@ -11,10 +11,12 @@ bool ListEmpty(EnemNode *List)
     return (List == nullptr);
 }
 
-bool InsertarList(EnemNode **List, int value, Enemy enem)
+bool InsertarList(EnemNode **List, int value, Enemy aux_enem)
 {
     // Insertion of the new node in the list.
     EnemNode *newnode;
+    //Copy the aux_enem in the new node.
+    newnode->enem = aux_enem;
     // Allocates space to store new node in the list.
     if ((newnode = (EnemNode *)malloc(1 * sizeof(EnemNode))) == nullptr)
     {
@@ -25,7 +27,7 @@ bool InsertarList(EnemNode **List, int value, Enemy enem)
     {
         // Memory available.
         // Loads content.
-        newnode->index = value;
+        newnode->index = value;  //!
         newnode->next = nullptr;
         // Linking new node to the list.
         // If first node, ->
@@ -86,10 +88,10 @@ EnemNode *SearchInList(EnemNode *List, int value, int option)
             switch (option)
             { // Deciding if we're searching current position or one before.
             case 0:
-                found = (p->index == value);
+                found = (p->index == value); //!
                 break;
             case -1:
-                found = (p->next->index == value);
+                found = (p->next->index == value); //!
                 break;
             }
 
@@ -108,7 +110,7 @@ void DelFromList(EnemNode **List, int value)
     if (!ListEmpty(*List))
     {
         p = *List;
-        if (p->index == value)
+        if (p->index == value)  //!
         {
             *List = p->next;
             free(p);

@@ -47,9 +47,12 @@ int g_enemy_in_window;
 
 void ConstuctEnemy(Enemy* enemy){
     static int enemy_count;
+    Enemy aux_enemy;
     if(enemy_count < g_enemy_in_window){
-        g_enemy_list->pos.x = rand() % 768;
-        g_enemy_list->pos.y = rand() % 576;
+        aux_enemy.pos.x = rand() % 768;
+        aux_enemy.pos.y = rand() % 576;
+        aux_enemy.sprite = 0;
+        
     }
 }
 
