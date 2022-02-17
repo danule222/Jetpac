@@ -28,6 +28,13 @@ struct Enemy
   int animation_counter;
 };
 
+struct EnemNode
+{
+  int index;
+  Enemy enem;
+  EnemNode *next;
+};
+
 #pragma endregion Enemigos
 
 #pragma region Nave
