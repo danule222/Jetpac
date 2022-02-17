@@ -102,7 +102,7 @@ void DelFromList(EnemNode **List, int value) {
             //Using -1 SearchInList.
             //The previous one to the containing one.
 		 	p = SearchInList(*List, value, -1);
-            //Locating q node  (.. next to last...)
+            //Locating q node (.. next to last...).
 		 	q = p->next;
 		 	if(p != nullptr){
 		 		p->next = q->next;
@@ -110,4 +110,23 @@ void DelFromList(EnemNode **List, int value) {
 		 	}
 		 }
 	}
+}
+
+int ListLength(EnemNode *List) {
+	EnemNode *p;
+	p = List;
+	int length;
+	for(p = List; p != nullptr; p = p->next){
+        length++;
+    }
+	return length;
+}
+
+EnemNode DelWholeList(EnemNode *List) {
+	if(!ListEmpty(List)) {
+		for(int i = 0; i < ListLength(List); i++) {
+			DelFromList(&List, i);
+		}
+	}
+	return *List;
 }
