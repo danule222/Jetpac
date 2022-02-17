@@ -133,7 +133,7 @@ int ListLength(EnemNode *List)
 {
     EnemNode *p;
     p = List;
-    int length;
+    int length = 0;
     for (p = List; p != nullptr; p = p->next)
     {
         length++;
