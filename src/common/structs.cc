@@ -11,6 +11,13 @@ struct Color
   unsigned char r, g, b, alpha = 255;
 };
 
+struct EnemNode
+{
+  int index;
+  Enemy enem;
+  EnemNode *next;
+};
+
 #pragma endregion General
 
 #pragma region Enemigos

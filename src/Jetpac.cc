@@ -18,6 +18,7 @@
 // Personal includes
 // Common
 #include "common/structs.cc"
+#include "common/lists_enems.cc"
 #include "common/utils.cc"
 // Screens
 
