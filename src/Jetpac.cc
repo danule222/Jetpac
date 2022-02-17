@@ -17,7 +17,8 @@
 
 // Personal includes
 // Common
-
+#include "common/structs.cc"
+#include "common/utils.cc"
 // Screens
 
 // Functions
