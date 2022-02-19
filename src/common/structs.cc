@@ -6,6 +6,14 @@
 
 #pragma region General
 
+struct Game
+{
+  int hiScore;
+  // @brief 0 - Cargando | 1 - Menú | 2 - Juego
+  int state;
+  int players;
+};
+
 struct Color
 {
   unsigned char r, g, b, alpha = 255;

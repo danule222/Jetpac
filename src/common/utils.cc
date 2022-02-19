@@ -1,7 +1,8 @@
 /**
  * @file utils.cc
  * @author Daniel Ramírez
- * @brief Estructuras usadas en el juego.
+ * @brief Funciones genéricas usadas en el
+ * juego.
  */
 
 void DrawColorSquare(esat::Vec2 pos, Color color, int width,
