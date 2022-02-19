@@ -36,7 +36,7 @@ int esat::main(int argc, char **argv)
 {
 	srand(time(NULL));
 
-	esat::WindowInit(WIDTH, HEIGHT);
+	esat::WindowInit(kWidth, kHeight);
 	WindowSetMouseVisibility(true);
 
 	InitializeGame();
