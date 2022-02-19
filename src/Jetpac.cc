@@ -18,14 +18,16 @@
 // Personal includes
 // Common
 #include "common/structs.cc"
+#include "common/definitions.cc"
 #include "common/lists_enems.cc"
 #include "common/utils.cc"
 // Screens
-
+#include "screens/common.cc"
+#include "screens/loading.cc"
+#include "screens/menu.cc"
+#include "screens/play.cc"
 // Functions
-
-// ZX Spectrum res.: 256×192 pixels
-int WIDTH = 768, HEIGHT = 576;
+#include "functions/game.cc"
 
 unsigned char fps = 60;
 double current_time, last_time;
@@ -37,12 +39,16 @@ int esat::main(int argc, char **argv)
 	esat::WindowInit(WIDTH, HEIGHT);
 	WindowSetMouseVisibility(true);
 
+	InitializeGame();
+
 	while (esat::WindowIsOpened() &&
 				 !esat::IsSpecialKeyDown(esat::kSpecialKey_Escape))
 	{
 		last_time = esat::Time();
 		esat::DrawBegin();
 		esat::DrawClear(0, 0, 0);
+
+		Game();
 
 		esat::DrawEnd();
 
