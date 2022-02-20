@@ -27,6 +27,7 @@
 #include "screens/menu.cc"
 #include "screens/play.cc"
 // Functions
+#include "functions/enemy.cc"
 #include "functions/game.cc"
 
 unsigned char fps = 60;
@@ -39,8 +40,11 @@ int esat::main(int argc, char **argv)
 	esat::WindowInit(kWidth, kHeight);
 	WindowSetMouseVisibility(true);
 
+  // Añadir a InitializeGame
+	EnemyStart();
+  
 	InitializeGame();
-
+  
 	while (esat::WindowIsOpened() &&
 				 !esat::IsSpecialKeyDown(esat::kSpecialKey_Escape))
 	{
@@ -48,8 +52,12 @@ int esat::main(int argc, char **argv)
 		esat::DrawBegin();
 		esat::DrawClear(0, 0, 0);
 
+    // Añadir a pantalla de juego
+    EnemyUpdate();
+		EnemyDraw();
+    
 		Game();
-
+    
 		esat::DrawEnd();
 
 		// Control FPS
@@ -61,6 +69,9 @@ int esat::main(int argc, char **argv)
 	}
 
 	esat::WindowDestroy();
-
+  
+  // Añadir a FinalizeGame
+	EnemyEnd();
+  
 	return 0;
 }
