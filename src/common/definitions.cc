@@ -11,3 +11,6 @@ const int kWidth = 768, kHeight = 576;
 
 // Game Properties
 Game g_game_properties;
+
+// Sprite Sheet
+esat::SpriteHandle g_spritesheet;

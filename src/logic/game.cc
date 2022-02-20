@@ -8,13 +8,18 @@
 void InitializeGame()
 {
   g_game_properties = {0, 0, 1};
+  g_spritesheet = esat::SpriteFromFile("../assets/spritesheet.png");
 
+  StartLoadingScreen();
   EnemyStart();
 }
 
 void FinalizeGame()
 {
   EnemyEnd();
+  EndLoadingScreen();
+
+  esat::SpriteRelease(g_spritesheet);
 }
 
 void Game()
