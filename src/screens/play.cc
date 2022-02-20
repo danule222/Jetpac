@@ -9,6 +9,23 @@
  *
  */
 
+void PlayInput()
+{
+}
+
+void PlayUpdate()
+{
+  EnemyUpdate();
+}
+
+void PlayDraw()
+{
+  EnemyDraw();
+}
+
 void PlayScreen()
 {
+  PlayInput();
+  PlayUpdate();
+  PlayDraw();
 }

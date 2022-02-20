@@ -8,6 +8,13 @@
 void InitializeGame()
 {
   g_game_properties = {0, 0, 1};
+
+  EnemyStart();
+}
+
+void FinalizeGame()
+{
+  EnemyEnd();
 }
 
 void Game()
