@@ -9,15 +9,20 @@ void InitializeGame()
 {
   g_game_properties = {0, 0, 1};
   g_spritesheet = esat::SpriteFromFile("../assets/spritesheet.png");
+  esat::DrawSetTextFont("../assets/zx_spectrum-7.ttf");
 
+  StartScreenCommon();
   StartLoadingScreen();
+  StartMenuScreen();
   EnemyStart();
 }
 
 void FinalizeGame()
 {
   EnemyEnd();
+  EndMenuScreen();
   EndLoadingScreen();
+  EndScreenCommon();
 
   esat::SpriteRelease(g_spritesheet);
 }

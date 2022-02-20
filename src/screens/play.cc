@@ -16,11 +16,15 @@ void PlayInput()
 void PlayUpdate()
 {
   EnemyUpdate();
+
+  ScreenCommonUpdate();
 }
 
 void PlayDraw()
 {
   EnemyDraw();
+
+  ScreenCommonDraw();
 }
 
 void PlayScreen()
