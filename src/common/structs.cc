@@ -19,7 +19,7 @@ struct Enemy
 {
   esat::Vec2 pos;
   esat::Vec2 dir;
-  esat::Vec3 color;
+  Color color;
   float speed;
   bool alive;
   bool explode;
@@ -30,7 +30,6 @@ struct Enemy
 
 struct EnemNode
 {
-  int index;
   Enemy enem;
   EnemNode *next;
 };
