@@ -18,14 +18,17 @@
 // Personal includes
 // Common
 #include "common/structs.cc"
+#include "common/definitions.cc"
 #include "common/lists_enems.cc"
 #include "common/utils.cc"
 // Screens
-
+#include "screens/common.cc"
+#include "screens/loading.cc"
+#include "screens/menu.cc"
+#include "screens/play.cc"
 // Functions
-#include "./functions/enemy.cc"
-// ZX Spectrum res.: 256×192 pixels
-int WIDTH = 768, HEIGHT = 576;
+#include "functions/enemy.cc"
+#include "functions/game.cc"
 
 unsigned char fps = 60;
 double current_time, last_time;
@@ -34,17 +37,27 @@ int esat::main(int argc, char **argv)
 {
 	srand(time(NULL));
 
-	esat::WindowInit(WIDTH, HEIGHT);
+	esat::WindowInit(kWidth, kHeight);
 	WindowSetMouseVisibility(true);
+
+  // Añadir a InitializeGame
 	EnemyStart();
+  
+	InitializeGame();
+  
 	while (esat::WindowIsOpened() &&
 				 !esat::IsSpecialKeyDown(esat::kSpecialKey_Escape))
 	{
 		last_time = esat::Time();
 		esat::DrawBegin();
-		esat::DrawClear(255, 255, 255);
-		EnemyUpdate();
+		esat::DrawClear(0, 0, 0);
+
+    // Añadir a pantalla de juego
+    EnemyUpdate();
 		EnemyDraw();
+    
+		Game();
+    
 		esat::DrawEnd();
 
 		// Control FPS
@@ -56,6 +69,9 @@ int esat::main(int argc, char **argv)
 	}
 
 	esat::WindowDestroy();
+  
+  // Añadir a FinalizeGame
 	EnemyEnd();
+  
 	return 0;
 }
