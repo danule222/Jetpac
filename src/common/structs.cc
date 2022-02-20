@@ -9,9 +9,11 @@
 struct Game
 {
   int hiScore;
-  // @brief 0 - Cargando | 1 - Menú | 2 - Juego
+  // 0 - Cargando | 1 - Menú | 2 - Juego
   int state;
   int players;
+  // 0 - Teclado | 1 - Joystick
+  int input_type;
 };
 
 struct Color

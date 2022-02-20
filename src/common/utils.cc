@@ -33,3 +33,19 @@ void DrawColorSquare(esat::Vec2 pos, Color color, int width,
   free(vertices);
   vertices = nullptr;
 }
+
+/**
+ * @brief Draws text on screen.
+ *
+ * @param x X Coord where the text will appear.
+ * @param y Y Coord where the text will appear.
+ * @param text The text that's going to appear on screen.
+ * @param size The size of the font.
+ * @param color Color of the text defined by the Color struct.
+ */
+void DrawText(float x, float y, const char *text, float size, Color color)
+{
+  esat::DrawSetFillColor(color.r, color.g, color.b, color.alpha);
+  esat::DrawSetTextSize(size);
+  esat::DrawText(x - 3, y + 18, text);
+}
