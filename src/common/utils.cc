@@ -24,6 +24,7 @@ void DrawColorSquare(esat::Vec2 pos, Color color, int width,
   *(vertices + 6) = pos.x;
   *(vertices + 7) = pos.y + height;
 
+  *(vertices + 8) = pos.x;
   *(vertices + 9) = pos.y;
 
   esat::DrawSetFillColor(color.r, color.g, color.b, color.alpha);

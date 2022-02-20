@@ -29,5 +29,6 @@ Color c_dark_cyan = {0, 224, 224};
 Color c_cyan = {0, 255, 255};
 Color c_dark_yellow = {224, 224, 0};
 Color c_yellow = {255, 255, 0};
+Color c_black = {0, 0, 0};
 Color c_grey = {224, 224, 224};
 Color c_white = {255, 255, 255};
