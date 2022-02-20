@@ -6,39 +6,6 @@
  * 
  */
 
-#include <esat/window.h>
-#include <esat/draw.h>
-#include <esat/input.h>
-#include <esat/sprite.h>
-#include <esat/time.h>
-#include <time.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-
-// #include "../common/structs.cc"
-// #include "../common/lists_enems.cc"
-
-// struct Vec2{
-//     float x, y;
-// };
-
-// struct Vec3{
-//     float x, y, z;
-// };
-
-// struct Enemy{
-//     Vec2 pos;
-//     Vec2 dir;
-//     Vec3 color;
-//     float speed;
-//     bool alive;
-//     bool explode;
-//     int explode_counter;
-//     int sprite;
-//     int animation_counter;
-// };
-
 esat::SpriteHandle* g_enemy_sprite_list = nullptr;
 EnemNode* g_enemy_list = nullptr;
 esat::SpriteHandle spritesheet;

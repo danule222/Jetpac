@@ -1,5 +1,4 @@
 #define TList EnemNode // Llamamos al tipo genérico EnemNode como TList
-// #include "structs.cc"
 #include <stdlib.h>
 
 
