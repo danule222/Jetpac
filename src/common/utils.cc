@@ -49,3 +49,32 @@ void DrawText(float x, float y, const char *text, float size, Color color)
   esat::DrawSetTextSize(size);
   esat::DrawText(x - 3, y + 18, text);
 }
+
+/**
+ * @brief Returns true if there is a collision.
+ *
+ * @param x1 Position X of the first sprite.
+ * @param y1 Position Y of the first sprite.
+ * @param w1 Width of the first sprite.
+ * @param h1 Height of the  first sprite.
+ * @param x2 Position X of the second sprite.
+ * @param y2 Position Y of the second sprite.
+ * @param w2 Width of the second sprite.
+ * @param h2 Height of the  second sprite.
+ * @return true There is collision.
+ * @return false There is no collision.
+ */
+bool CheckCollision(int x1, int y1, int w1, int h1,
+                    int x2, int y2, int w2, int h2)
+{
+  for (int i = y1; i <= h1 + y1; i++)
+  {
+    for (int j = x1; j <= w1 + x1; j++)
+    {
+      if (j >= x2 && j <= x2 + w2 && i >= y2 && i <= y2 + h2)
+        return true;
+    }
+  }
+
+  return false;
+}
