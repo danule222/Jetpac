@@ -8,14 +8,14 @@
 esat::SpriteHandle *g_sprites_jugador, *g_sprites_assets;
 Jugador g_player;
 Asset *g_floor_pointer;
-bool g_grav = true;
+// bool g_grav = true;
 
 void StartPlayerAssets() 
 {
     int i = 0;
     g_player.sprite = 18;
     g_player.pos.x = kWidth / 2;
-    g_player.pos.y = kHeight - 96;
+    g_player.pos.y = kHeight - 100;
 
     g_floor_pointer = (Asset*)malloc(32 * sizeof(Asset));
         for(int j = 0; j < 768; j+=24) {
@@ -62,15 +62,22 @@ void InputPlayer()
         g_player.sprite = 2; 
     }
     if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Space)) {
+            if(g_player.grav > -3) {
+                g_player.grav -= 1.5;
+            }
     }
-    // GRAVEDAD TEMPORAL
     g_player.pos.y += g_player.grav;
 }
 
 void PlayerCollision()
 {
     if(CheckCollision(0,552,768,24,g_player.pos.x,g_player.pos.y,48,72)) {
-        g_player.pos.y -= 5.8;
+        g_player.grav = 0;
+        g_player.pos.y = 480;
+    } else {
+        if(g_player.grav < 4.8) {
+            g_player.grav += 0.5;
+        }
     }
 }
 

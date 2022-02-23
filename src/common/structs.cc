@@ -63,8 +63,8 @@ struct Jugador
 {
   esat::Vec2 pos;
   Color color;
-  float speed;
-  float grav = 5.8;
+  // float speed;
+  float grav = 4.8;
   bool alive;
   bool explode;
   int sprite;
