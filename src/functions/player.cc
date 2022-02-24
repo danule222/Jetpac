@@ -8,16 +8,25 @@
 esat::SpriteHandle *g_sprites_jugador, *g_sprites_assets;
 Jugador g_player;
 Asset *g_floor_pointer;
+Asset *g_platform1, *g_platform2, *g_platform3; 
 // bool g_grav = true;
 
 void StartPlayerAssets() 
 {
     int i = 0;
+    int contador = 0;
+    int contador2 = 0;
+    int contador3 = 0;
     g_player.sprite = 18;
     g_player.pos.x = kWidth / 2;
     g_player.pos.y = kHeight - 100;
 
     g_floor_pointer = (Asset*)malloc(32 * sizeof(Asset));
+    g_platform1 = (Asset*)malloc(6 * sizeof(Asset));
+    g_platform2 = (Asset*)malloc(4 * sizeof(Asset));
+    g_platform3 = (Asset*)malloc(6 * sizeof(Asset));
+
+        // SUELOS
         for(int j = 0; j < 768; j+=24) {
             (g_floor_pointer + i)->pos.x = j;
             ++i;
@@ -30,6 +39,52 @@ void StartPlayerAssets()
         }
         (g_floor_pointer + 0)->sprite = 0;
         (g_floor_pointer + 31)->sprite = 2;
+
+        // PLATAFORMAS 1
+
+        for(int j = 96; j < 240; j+=24) {
+            (g_platform1 + contador)->pos.x = j;
+            ++contador;
+        }
+        for(int x = 0; x < 6; ++x) {
+            (g_platform1 + x)->pos.y = 216;
+                if(x > 0 && x < 5) {
+                    (g_platform1 + x)->sprite = 1;
+                }
+        }
+        (g_platform1 + 0)->sprite = 0;
+        (g_platform1 + 5)->sprite = 2;
+
+        // PLATAFORMAS 2
+
+        for(int j = 360; j < 456; j+=24) {
+            (g_platform2 + contador2)->pos.x = j;
+            ++contador2;
+        }
+        for(int x = 0; x < 4; ++x) {
+            (g_platform2 + x)->pos.y = 288;
+                if(x > 0 && x < 3) {
+                    (g_platform2 + x)->sprite = 1;
+                }
+        }
+        (g_platform2 + 0)->sprite = 0;
+        (g_platform2 + 3)->sprite = 2;
+
+        // PLATAFORMAS 3
+
+        for(int j = 576; j < 720; j+=24) {
+            (g_platform3 + contador3)->pos.x = j;
+            ++contador3;
+        }
+        for(int x = 0; x < 6; ++x) {
+            (g_platform3 + x)->pos.y = 144;
+                if(x > 0 && x < 5) {
+                    (g_platform3 + x)->sprite = 1;
+                }
+        }
+        (g_platform3 + 0)->sprite = 0;
+        (g_platform3 + 5)->sprite = 2;
+
 }
 
 void InitSpritesPlayerAssets() 
@@ -52,21 +107,20 @@ void InitSpritesPlayerAssets()
 
 void InputPlayer() 
 {
-
-    if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Right)) {
-        g_player.pos.x += 5;
-        g_player.sprite = 18;
-    }
-    if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Left)) {
-        g_player.pos.x -= 5;
-        g_player.sprite = 2; 
-    }
-    if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Space)) {
-            if(g_player.grav > -3) {
-                g_player.grav -= 1.5;
-            }
-    }
-    g_player.pos.y += g_player.grav;
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Right)) {
+            g_player.pos.x += 5;
+            g_player.sprite = 18;
+        }
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Left)) {
+            g_player.pos.x -= 5;
+            g_player.sprite = 2; 
+        }
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Space)) {
+                if(g_player.grav > -3) {
+                    g_player.grav -= 1.5;
+                }
+        }
+        g_player.pos.y += g_player.grav;
 }
 
 void PlayerCollision()
@@ -85,12 +139,25 @@ void PlayerCollision()
 void DrawAssets()
 {
     esat::Vec2 pos_floor_masc = {0, 552};
+    esat::Vec2 pos_plat1 = {96,216};
+    esat::Vec2 pos_plat2 = {360,288};
+    esat::Vec2 pos_plat3 = {576,144};
     DrawColorSquare(pos_floor_masc, c_yellow, 768, 24);
+    DrawColorSquare(pos_plat1, c_green, 144,24);
+    DrawColorSquare(pos_plat2, c_green, 96, 24);
+    DrawColorSquare(pos_plat3, c_green, 144,24);
         for(int i = 0; i < 32; ++i) {
             esat::DrawSprite(*(g_sprites_assets + (g_floor_pointer + i)->sprite), (g_floor_pointer + i)->pos.x, (g_floor_pointer + i)->pos.y );
         }
-
-
+        for(int i = 0; i < 6; ++i) {
+            esat::DrawSprite(*(g_sprites_assets + (g_platform1 + i)->sprite), (g_platform1 + i)->pos.x, (g_platform1 + i)->pos.y);
+        }
+        for(int i = 0; i < 4; ++i) {
+            esat::DrawSprite(*(g_sprites_assets + (g_platform2 + i)->sprite), (g_platform2 + i)->pos.x, (g_platform2 + i)->pos.y);
+        }
+        for(int i = 0; i < 6; ++i) {
+            esat::DrawSprite(*(g_sprites_assets + (g_platform3 + i)->sprite), (g_platform3 + i)->pos.x, (g_platform3 + i)->pos.y);
+        }
 }
 
 
