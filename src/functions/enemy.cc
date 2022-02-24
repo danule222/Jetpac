@@ -19,7 +19,7 @@ static void ConstuctEnemy()
     if (ListLength(g_enemy_list) < g_enemy_in_window)
     {   
         int aux_i = rand() % 14;
-        aux_enemy.sprite = 6;
+        aux_enemy.sprite = 7;
         aux_enemy.speed = 1 + rand() % 5;
         aux_enemy.animation_counter = 0;
         aux_enemy.spawn = true;
@@ -78,7 +78,12 @@ static void ConstuctEnemy()
                 Vec2Normalize(&aux_enemy.dir);
                 break;
             case 7:
-                
+                aux_enemy.pos.x =   (768.0f - 48.0f);
+                aux_enemy.pos.y = rand() % (576 - esat::SpriteHeight(*(g_enemy_sprite_list + aux_enemy.sprite)));
+                aux_enemy.dir.x = (5 + rand() % 15) * -1;
+                aux_enemy.dir.y = rand() % 5;
+                aux_enemy.speed = 3;
+                Vec2Normalize(&aux_enemy.dir);
                 break;
             case 8:
                 aux_enemy.pos.x = 1.0f;
@@ -444,7 +449,9 @@ static void MovementRules(Enemy* enemy){
         }
         break;
     case 7: //?
-        
+         if(enemy->dir.x < 0 && enemy->pos.x < 0 - 48){
+            enemy->pos.x = 768.0f - 48.0f;
+        }
         break;
     case 8:
         if(enemy->dir.x > 0 && enemy->pos.x > 768){
@@ -488,7 +495,7 @@ static void MovementRules(Enemy* enemy){
             }
         }
         break;
-    case 9: //!
+    case 9:
         if(enemy->dir.x > 0 && enemy->pos.x > 768){
             enemy->pos.x = 0.0f;
         }
@@ -636,8 +643,8 @@ void EnemyUpdate()
     SpawnEnemy();
     for(int i = 0; i < ListLength(g_enemy_list); ++i){
         aux_enemy = IndexList(g_enemy_list, i);
-        MovementRules(&aux_enemy->enem);
         MoveEnemy(&aux_enemy->enem);
+        MovementRules(&aux_enemy->enem);
         
     }
     if (esat::IsKeyDown('P'))
