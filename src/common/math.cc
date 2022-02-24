@@ -10,11 +10,12 @@ float Vec2Module(esat::Vec2 v) {
     return (float)sqrt(((v.x * v.x) + (v.y * v.y)));
 }
 
-void Vec2Normalize(esat::Vec2* v) {
+esat::Vec2 Vec2Normalize(esat::Vec2* v) {
     float m;
     m = Vec2Module(*v);
     v->x = v->x / m;
     v->y = v->y / m;
+    return *v;
 }
 
 esat::Vec2 Vec2Add(esat::Vec2 v1, esat::Vec2 v2) {

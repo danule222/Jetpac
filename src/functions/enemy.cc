@@ -19,7 +19,7 @@ static void ConstuctEnemy()
     if (ListLength(g_enemy_list) < g_enemy_in_window)
     {   
         int aux_i = rand() % 14;
-        aux_enemy.sprite = 7;
+        aux_enemy.sprite = 12;
         aux_enemy.speed = 1 + rand() % 5;
         aux_enemy.animation_counter = 0;
         aux_enemy.spawn = true;
@@ -102,7 +102,12 @@ static void ConstuctEnemy()
                 Vec2Normalize(&aux_enemy.dir);
                 break;
             case 10:
-                
+                aux_enemy.pos.x = 1.0f;
+                aux_enemy.pos.y = rand() % (576 - esat::SpriteHeight(*(g_enemy_sprite_list + aux_enemy.sprite)) - 50);
+                aux_enemy.dir.x = 1;
+                aux_enemy.dir.y = 0;
+                aux_enemy.speed = 3;
+                Vec2Normalize(&aux_enemy.dir);
                 break;
             case 11:
                 aux_enemy.pos.x =   0.0f;
@@ -113,7 +118,12 @@ static void ConstuctEnemy()
                 Vec2Normalize(&aux_enemy.dir);
                 break;
             case 12:
-                
+                aux_enemy.pos.x = 1.0f;
+                aux_enemy.pos.y = rand() % (576 - esat::SpriteHeight(*(g_enemy_sprite_list + aux_enemy.sprite)) - 50);
+                aux_enemy.dir.x = 1;
+                aux_enemy.dir.y = 0;
+                aux_enemy.speed = 3;
+                Vec2Normalize(&aux_enemy.dir);
                 break;
         }
         switch (aux_i)
@@ -449,7 +459,7 @@ static void MovementRules(Enemy* enemy){
         }
         break;
     case 7: //?
-         if(enemy->dir.x < 0 && enemy->pos.x < 0 - 48){
+        if(enemy->dir.x < 0 && enemy->pos.x < 0 - 48){
             enemy->pos.x = 768.0f - 48.0f;
         }
         break;
@@ -461,17 +471,18 @@ static void MovementRules(Enemy* enemy){
             enemy->pos.x = 768.0f - 48.0f;
         }
         if(enemy->spawn){
-            if((rand() % 60) == 0){
-                enemy->spawn = false;
-            }
             enemy->dir.x = 0;
             enemy->dir.y = (g_player.pos.y + (72 / 2)) - enemy->pos.y;
             Vec2Normalize(&enemy->dir);
+            if((rand() % 60) == 0){
+                enemy->spawn = false;
+                enemy->pos.x = 0;
+            }
         }else{
             esat::Vec2 aux_vec;
             aux_vec.y = (g_player.pos.y + (72 / 2)) - enemy->pos.y;
             aux_vec.x = (g_player.pos.x + (48 / 2)) - enemy->pos.x;
-            Vec2Normalize(&aux_vec);
+            aux_vec = Vec2Normalize(&aux_vec);
             if((g_player.pos.x + (72 / 2)) > enemy->pos.x + 48){
                 if((g_player.pos.y + (72 / 2)) > enemy->pos.y){
                     if(aux_vec.y > 0.707){
@@ -491,8 +502,8 @@ static void MovementRules(Enemy* enemy){
                         enemy->dir.x = aux_vec.x;
                     }
                 }
-                        printf("%f %f\n", enemy->dir.x, enemy->dir.y);
             }
+            enemy->dir = Vec2Normalize(&enemy->dir);
         }
         break;
     case 9:
@@ -511,12 +522,12 @@ static void MovementRules(Enemy* enemy){
                 enemy->pos.x = (768 - 24);
                 enemy->dir.x = -1;
                 enemy->dir.y = (g_player.pos.y + (72 / 2)) - enemy->pos.y;
-                printf("si\n");
+                Vec2Normalize(&enemy->dir);
             }
         }else{ 
             aux_vec.y = (g_player.pos.y + (72 / 2)) - enemy->pos.y;
             aux_vec.x = (g_player.pos.x + (48 / 2)) - enemy->pos.x;
-            Vec2Normalize(&aux_vec);
+            aux_vec = Vec2Normalize(&aux_vec);
             if((g_player.pos.x + (72 / 2)) < enemy->pos.x){
                 if((g_player.pos.y + (72 / 2)) > enemy->pos.y){
                     if(aux_vec.y > 0.707){
@@ -537,10 +548,70 @@ static void MovementRules(Enemy* enemy){
                     }
                 }
             }
+            enemy->dir = Vec2Normalize(&enemy->dir);
         }
         break;
     case 10:
-        
+        aux_vec.y = (g_player.pos.y + (72 / 2)) - enemy->pos.y;
+        aux_vec.x = (g_player.pos.x + (48 / 2)) - enemy->pos.x;
+        aux_vec = Vec2Normalize(&aux_vec);
+        if(enemy->dir.y > 0 && enemy->pos.y >= (576 - esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)))){
+            enemy->dir.y *= -1;
+        }
+        if(enemy->dir.y < 0 && enemy->pos.y <= 45 ){
+            enemy->dir.y *= -1;
+        }
+        if(enemy->dir.x > 0 && enemy->pos.x > 768){
+            enemy->pos.x = 0.0f;
+        }
+        if(enemy->dir.x < 0 && enemy->pos.x < 0 - 48){
+            enemy->pos.x = 768.0f - 48.0f;
+        }
+        enemy->dir.y += aux_vec.y;
+        enemy->dir.x += aux_vec.x;
+        enemy->dir = Vec2Normalize(&enemy->dir);
+        if(CheckCollision(enemy->pos.x, enemy->pos.y,
+        esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
+        esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
+        96, 216, 144, 24)){
+            if(enemy->pos.x <= 96){
+                enemy->dir.x *= -15;
+            }else if((enemy->pos.x + 48) >= (96 + 144)){
+                enemy->dir.x *= -15;
+            }else if(enemy->pos.y < 216){
+                enemy->dir.y *= -15;
+            }else if((enemy->pos.y + 48) > (216 + 24)){
+                enemy->dir.y *= -15;
+            }
+        }
+        if(CheckCollision(enemy->pos.x, enemy->pos.y, 
+        esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
+        esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
+        576, 144, 144, 24)){
+            if(enemy->pos.x <= 576){
+                enemy->dir.x *= -15;
+            }else if((enemy->pos.x + 48) >= (576 + 144)){
+                enemy->dir.x *= -15;
+            }else if(enemy->pos.y < 144){
+                enemy->dir.y *= -15;
+            }else if((enemy->pos.y + 48) > (144 + 24)){
+                enemy->dir.y *= -15;
+            }
+        }
+        if(CheckCollision(enemy->pos.x, enemy->pos.y, 
+        esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
+        esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
+        360, 288, 96, 24)){
+            if(enemy->pos.x <= 360){
+                enemy->dir.x *= -15;
+            }else if((enemy->pos.x + 48) >= (360 + 144)){
+                enemy->dir.x *= -15;
+            }else if(enemy->pos.y < 288){
+                enemy->dir.y *= -15;
+            }else if((enemy->pos.y + 48) > (288 + 24)){
+                enemy->dir.y *= -15;
+            }
+        }
         break;
     case 11:
         if(enemy->dir.y > 0 && enemy->pos.y >= (576 - esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)) - 24)){
@@ -611,7 +682,66 @@ static void MovementRules(Enemy* enemy){
         }
         break;
     case 12:
-        
+        aux_vec.y = (g_player.pos.y + (72 / 2)) - enemy->pos.y;
+        aux_vec.x = (g_player.pos.x + (48 / 2)) - enemy->pos.x;
+        aux_vec = Vec2Normalize(&aux_vec);
+        if(enemy->dir.y > 0 && enemy->pos.y >= (576 - esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)))){
+            enemy->dir.y *= -1;
+        }
+        if(enemy->dir.y < 0 && enemy->pos.y <= 45 ){
+            enemy->dir.y *= -1;
+        }
+        if(enemy->dir.x > 0 && enemy->pos.x > 768){
+            enemy->pos.x = 0.0f;
+        }
+        if(enemy->dir.x < 0 && enemy->pos.x < 0 - 48){
+            enemy->pos.x = 768.0f - 48.0f;
+        }
+        enemy->dir.y += aux_vec.y;
+        enemy->dir.x += aux_vec.x;
+        enemy->dir = Vec2Normalize(&enemy->dir);
+        if(CheckCollision(enemy->pos.x, enemy->pos.y,
+        esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
+        esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
+        96, 216, 144, 24)){
+            if(enemy->pos.x <= 96){
+                enemy->dir.x *= -15;
+            }else if((enemy->pos.x + 48) >= (96 + 144)){
+                enemy->dir.x *= -15;
+            }else if(enemy->pos.y < 216){
+                enemy->dir.y *= -15;
+            }else if((enemy->pos.y + 48) > (216 + 24)){
+                enemy->dir.y *= -15;
+            }
+        }
+        if(CheckCollision(enemy->pos.x, enemy->pos.y, 
+        esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
+        esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
+        576, 144, 144, 24)){
+            if(enemy->pos.x <= 576){
+                enemy->dir.x *= -15;
+            }else if((enemy->pos.x + 48) >= (576 + 144)){
+                enemy->dir.x *= -15;
+            }else if(enemy->pos.y < 144){
+                enemy->dir.y *= -15;
+            }else if((enemy->pos.y + 48) > (144 + 24)){
+                enemy->dir.y *= -15;
+            }
+        }
+        if(CheckCollision(enemy->pos.x, enemy->pos.y, 
+        esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
+        esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
+        360, 288, 96, 24)){
+            if(enemy->pos.x <= 360){
+                enemy->dir.x *= -15;
+            }else if((enemy->pos.x + 48) >= (360 + 144)){
+                enemy->dir.x *= -15;
+            }else if(enemy->pos.y < 288){
+                enemy->dir.y *= -15;
+            }else if((enemy->pos.y + 48) > (288 + 24)){
+                enemy->dir.y *= -15;
+            }
+        }
         break;
     }
 }
