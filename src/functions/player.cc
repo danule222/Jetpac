@@ -178,4 +178,7 @@ void EndPlayer()
     free(g_sprites_jugador);
     free(g_sprites_assets);
     free(g_floor_pointer);
+    free(g_platform1);
+    free(g_platform2);
+    free(g_platform3);
 }
