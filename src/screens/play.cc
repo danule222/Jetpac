@@ -18,7 +18,7 @@ void PlayUpdate()
 {
   EnemyUpdate();
   PlayerCollision();
-
+  CalculeCollision();
   ScreenCommonUpdate();
 }
 
