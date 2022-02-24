@@ -16,14 +16,14 @@ void PlayInput()
 void PlayUpdate()
 {
   EnemyUpdate();
-
+  MovementsPowerUps();
   ScreenCommonUpdate();
 }
 
 void PlayDraw()
 {
   EnemyDraw();
-
+  PowerUpsDraw();
   ScreenCommonDraw();
 }
 
