@@ -59,3 +59,32 @@ int numero;
 };
 
 #pragma endregion Nave
+
+#pragma region Jugador
+
+struct Jugador 
+{
+  esat::Vec2 pos;
+  Color color;
+  // float speed;
+  float grav = 4.8;
+  bool alive;
+  bool explode;
+  int sprite;
+  int score;
+  int nivel;
+};
+
+#pragma endregion Jugador
+
+#pragma region asset
+
+struct Asset
+{
+  esat::Vec2 pos;
+  int sprite;
+  bool dibujar;
+};
+
+#pragma endregion asset
+

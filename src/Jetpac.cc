@@ -23,6 +23,7 @@
 #include "common/utils.cc"
 // Functions
 #include "functions/enemy.cc"
+#include "functions/player.cc"
 #include "functions/power_ups.cc"
 // Screens
 #include "screens/common.cc"

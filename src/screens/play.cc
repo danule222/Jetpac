@@ -11,12 +11,15 @@
 
 void PlayInput()
 {
+  InputPlayer();
 }
 
 void PlayUpdate()
 {
   EnemyUpdate();
   MovementsPowerUps();
+  PlayerCollision();
+
   ScreenCommonUpdate();
 }
 
@@ -24,6 +27,9 @@ void PlayDraw()
 {
   EnemyDraw();
   PowerUpsDraw();
+  DrawAssets();
+  DrawPlayer();
+
   ScreenCommonDraw();
 }
 

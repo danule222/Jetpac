@@ -11,6 +11,8 @@ void InitializeGame()
   g_spritesheet = esat::SpriteFromFile("../assets/spritesheet.png");
   esat::DrawSetTextFont("../assets/zx_spectrum-7.ttf");
 
+  StartPlayerAssets();
+  InitSpritesPlayerAssets();
   StartScreenCommon();
   StartLoadingScreen();
   StartMenuScreen();
@@ -24,6 +26,7 @@ void FinalizeGame()
   PowerUpsEnd();
   EndLoadingScreen();
   EndScreenCommon();
+  EndPlayer();
 
   esat::SpriteRelease(g_spritesheet);
 }
