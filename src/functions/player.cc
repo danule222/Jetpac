@@ -2,7 +2,7 @@
  * @file player.cc
  * @author Juan S. Avilés
  * @brief Funciones de logica del Jugador
- * 
+ *
  */
 
 esat::SpriteHandle *g_sprites_jugador, *g_sprites_assets;
@@ -11,7 +11,7 @@ Asset *g_floor_pointer;
 Asset *g_platform1, *g_platform2, *g_platform3; 
 // bool g_grav = true;
 
-void StartPlayerAssets() 
+void StartPlayerAssets()
 {
     int i = 0;
     int contador = 0;
@@ -87,25 +87,27 @@ void StartPlayerAssets()
 
 }
 
-void InitSpritesPlayerAssets() 
+void InitSpritesPlayerAssets()
 {
     int sprite_count = 0;
-    g_sprites_assets = (esat::SpriteHandle*)malloc(3 * sizeof(esat::SpriteHandle));
-    g_sprites_jugador = (esat::SpriteHandle*)malloc(70 * sizeof(esat::SpriteHandle));
-        for(int i = 0; i < 35; ++i) {
-            *(g_sprites_jugador + sprite_count) = esat::SubSprite(g_spritesheet, i * 48, 96, 48, 48);
-            ++sprite_count;
-        }
-        for(int j = 0; j < 35; ++j) {
-            *(g_sprites_jugador + sprite_count) = esat::SubSprite(g_spritesheet, j * 48, 144, 48, 48);
-            ++sprite_count;
-        }
+    g_sprites_assets = (esat::SpriteHandle *)malloc(3 * sizeof(esat::SpriteHandle));
+    g_sprites_jugador = (esat::SpriteHandle *)malloc(70 * sizeof(esat::SpriteHandle));
+    for (int i = 0; i < 35; ++i)
+    {
+        *(g_sprites_jugador + sprite_count) = esat::SubSprite(g_spritesheet, i * 48, 96, 48, 48);
+        ++sprite_count;
+    }
+    for (int j = 0; j < 35; ++j)
+    {
+        *(g_sprites_jugador + sprite_count) = esat::SubSprite(g_spritesheet, j * 48, 144, 48, 48);
+        ++sprite_count;
+    }
     *(g_sprites_assets + 0) = esat::SubSprite(g_spritesheet, 0, 48, 24, 24);
     *(g_sprites_assets + 1) = esat::SubSprite(g_spritesheet, 48, 48, 24, 24);
     *(g_sprites_assets + 2) = esat::SubSprite(g_spritesheet, 96, 48, 24, 24);
 }
 
-void InputPlayer() 
+void InputPlayer()
 {
         if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Right)) {
             g_player.pos.x += 5;
@@ -125,16 +127,19 @@ void InputPlayer()
 
 void PlayerCollision()
 {
-    if(CheckCollision(0,552,768,24,g_player.pos.x,g_player.pos.y,48,72)) {
+    if (CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72))
+    {
         g_player.grav = 0;
         g_player.pos.y = 480;
-    } else {
-        if(g_player.grav < 4.8) {
+    }
+    else
+    {
+        if (g_player.grav < 4.8)
+        {
             g_player.grav += 0.5;
         }
     }
 }
-
 
 void DrawAssets()
 {
@@ -160,18 +165,17 @@ void DrawAssets()
         }
 }
 
-
-void DrawPlayer() 
+void DrawPlayer()
 {
     esat::Vec2 pos_masc_player = {g_player.pos.x, g_player.pos.y + 1};
-    DrawColorSquare(pos_masc_player,c_white,48,69);
-    esat::DrawSprite(*(g_sprites_jugador + g_player.sprite),g_player.pos.x, g_player.pos.y);
-    esat::DrawSprite(*(g_sprites_jugador + g_player.sprite + 1),g_player.pos.x, g_player.pos.y + 47);
+    DrawColorSquare(pos_masc_player, c_white, 48, 69);
+    esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
+    esat::DrawSprite(*(g_sprites_jugador + g_player.sprite + 1), g_player.pos.x, g_player.pos.y + 47);
 }
 
 void EndPlayer()
 {
     free(g_sprites_jugador);
     free(g_sprites_assets);
-	free(g_floor_pointer);
+    free(g_floor_pointer);
 }

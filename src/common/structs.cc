@@ -33,6 +33,7 @@ struct Enemy
   float speed;
   bool alive;
   bool explode;
+  bool spawn;
   int explode_counter;
   int sprite;
   int animation_counter;

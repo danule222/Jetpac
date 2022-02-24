@@ -21,9 +21,10 @@
 #include "common/definitions.cc"
 #include "common/lists_enems.cc"
 #include "common/utils.cc"
+#include "common/math.cc"
 // Functions
-#include "functions/enemy.cc"
 #include "functions/player.cc"
+#include "functions/enemy.cc"
 // Screens
 #include "screens/common.cc"
 #include "screens/loading.cc"
