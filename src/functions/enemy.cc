@@ -1221,9 +1221,6 @@ void EnemyDraw()
                             aux_enemy->enem.pos.y);
         }
     }
-        DrawColorSquare({96, 216}, {255,0,0,255}, 144, 24);
-        DrawColorSquare({576, 144}, {255,0,0,255}, 144, 24);
-        DrawColorSquare({360, 288}, {255,0,0,255}, 96, 24);
 }
 
 void EnemyEnd()
