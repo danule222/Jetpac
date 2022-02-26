@@ -139,9 +139,9 @@ void DelWholeList(EnemNode **List)
 {
     if (!ListEmpty(*List))
     {
-        for (int i = 0; i < ListLength(*List); i++)
+        for (int i = ListLength(*List) - 1; i >= 0 ; i--)
         {
-            DelFromList(List, 0);
+            DelFromList(List, i);
         }
     }
 }

@@ -12,13 +12,52 @@ double g_last_spawn_time, g_current_spawn_time;
 double g_enemy_spawn_time = 0.5;
 int g_enemy_in_window = 6;
 
+static int SelectEnemyType(){
+    int enemy_type = g_player.nivel % 8;
+    switch(enemy_type){
+        case 0:
+            return 0;
+            break;
+        case 1:
+             return 2;
+            break;
+        case 2:
+            return 4;
+            break;
+        case 6:
+            if((rand() % 2) == 0){
+                return 6;
+            }else{
+                return 7;
+            }
+            break;
+        case 3:
+            if((rand() % 2) == 0){
+                return 8;
+            }else{
+                return 9;
+            }
+            break;
+        case 7:
+            return 10;
+            break;
+        case 5:
+            return 11;
+            break;
+        case 4:
+            return 12;
+            break;
+    }
+    return 0;
+}
+
 static void ConstuctEnemy()
 {
     Enemy aux_enemy;
     if (ListLength(g_enemy_list) < g_enemy_in_window)
     {
         int aux_i = rand() % 14;
-        aux_enemy.sprite = 6;
+        aux_enemy.sprite = SelectEnemyType();
         aux_enemy.speed = 1 + rand() % 5;
         aux_enemy.animation_counter = 0;
         aux_enemy.spawn = true;
@@ -1121,6 +1160,35 @@ static void MoveEnemy(Enemy *enemy)
     }
 }
 
+static void AnimationEnemy(Enemy *enemy){
+    if(!enemy->explode){
+        enemy->animation_counter++;
+        enemy->animation_counter %= 30;
+        if(enemy->animation_counter == 0){
+            switch(enemy->sprite){
+                case 0:
+                    enemy->sprite = 1;
+                    break;
+                case 1:
+                    enemy->sprite = 0;
+                    break;
+                case 2:
+                    enemy->sprite = 3;
+                    break;
+                case 3:
+                    enemy->sprite = 2;
+                    break;
+                case 4:
+                    enemy->sprite = 5;
+                    break;
+                case 5:
+                    enemy->sprite = 4;
+                    break;
+            }
+        }
+    }
+}
+
 static void EnemyExplosion(Enemy *enemy){
     if(enemy->explode){
         enemy->explode_counter++;
@@ -1137,6 +1205,7 @@ void EnemyStart()
     g_last_spawn_time = esat::Time();
     g_enemy_sprite_list = (esat::SpriteHandle *)malloc(sizeof(esat::SpriteHandle) * 13);
     g_explosion_sprite_list = (esat::SpriteHandle *)malloc(sizeof(esat::SpriteHandle) * 3);
+    //g_player.nivel = 0;
     CrearList(&g_enemy_list);
     for (int i = 3; i <= 13; ++i)
     {
@@ -1168,10 +1237,13 @@ void EnemyUpdate()
         aux_enemy = IndexList(g_enemy_list, i);
         MoveEnemy(&aux_enemy->enem);
         EnemyExplosion(&aux_enemy->enem);
+        AnimationEnemy(&aux_enemy->enem);
     }
-    if (esat::IsKeyDown('P'))
-    {
-    }
+    // if (esat::IsKeyDown('P'))
+    // {
+    //     g_player.nivel++;
+    //     DelWholeList(&g_enemy_list);
+    // }
 }
 
 void EnemyDraw()
