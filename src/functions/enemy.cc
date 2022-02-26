@@ -1205,7 +1205,7 @@ void EnemyStart()
     g_last_spawn_time = esat::Time();
     g_enemy_sprite_list = (esat::SpriteHandle *)malloc(sizeof(esat::SpriteHandle) * 13);
     g_explosion_sprite_list = (esat::SpriteHandle *)malloc(sizeof(esat::SpriteHandle) * 3);
-    \\g_player.nivel = 0;
+    //g_player.nivel = 0;
     CrearList(&g_enemy_list);
     for (int i = 3; i <= 13; ++i)
     {
