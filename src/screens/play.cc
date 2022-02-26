@@ -8,6 +8,8 @@
 void PlayInput()
 {
   InputPlayer();
+
+  ScreenCommonInput();
 }
 
 void PlayUpdate()

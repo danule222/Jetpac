@@ -26,6 +26,8 @@ void MenuScreenInput()
     g_game_properties.input_type = 1;
   if (esat::IsKeyPressed('5'))
     g_game_properties.state = 2;
+
+  ScreenCommonInput();
 }
 
 void MenuScreenUpdate()

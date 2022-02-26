@@ -18,6 +18,7 @@ void InitializeGame()
   StartLoadingScreen();
   StartMenuScreen();
   EnemyStart();
+  StartSaveGame();
 }
 
 void FinalizeGame()

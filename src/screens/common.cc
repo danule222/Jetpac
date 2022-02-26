@@ -13,6 +13,11 @@ void EndScreenCommon()
 {
 }
 
+void ScreenCommonInput()
+{
+  SaveGameInput();
+}
+
 void ScreenCommonUpdate()
 {
 }
@@ -25,4 +30,6 @@ void ScreenCommonDraw()
   DrawText(27, 27, "000000", 30, c_yellow);
   DrawText(315, 27, "000000", 30, c_yellow);
   DrawText(603, 27, "000000", 30, c_yellow);
+
+  SaveGameDraw();
 }
