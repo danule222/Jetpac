@@ -30,6 +30,7 @@
 #include "functions/player.cc"
 #include "functions/enemy.cc"
 #include "functions/collisions.cc"
+#include "functions/save_game.cc"
 // Screens
 #include "screens/common.cc"
 #include "screens/loading.cc"

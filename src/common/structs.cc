@@ -84,3 +84,13 @@ struct Asset
 };
 
 #pragma endregion asset
+
+#pragma region SaveGame
+
+struct TSaveGame
+{
+  Game game_state;
+  struct tm date;
+};
+
+#pragma endregion SaveGame
