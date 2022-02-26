@@ -50,7 +50,7 @@ void MenuScreenDraw()
   case 1:
     if (g_text_is_highlighted)
     {
-      DrawColorSquare({144, 168}, c_white, 408, 24);
+      DrawColorSquare({144, 168}, c_white, 408, 24, false);
       DrawText(147, 171, "1   1 PLAYER GAME", 30, c_black);
     }
     else
@@ -63,7 +63,7 @@ void MenuScreenDraw()
   case 2:
     if (g_text_is_highlighted)
     {
-      DrawColorSquare({144, 216}, c_white, 408, 24);
+      DrawColorSquare({144, 216}, c_white, 408, 24, false);
       DrawText(147, 219, "2   2 PLAYER GAME", 30, c_black);
     }
     else
@@ -80,7 +80,7 @@ void MenuScreenDraw()
   case 0:
     if (g_text_is_highlighted)
     {
-      DrawColorSquare({144, 264}, c_white, 288, 24);
+      DrawColorSquare({144, 264}, c_white, 288, 24, false);
       DrawText(147, 267, "3   KEYBOARD", 30, c_black);
     }
     else
@@ -93,7 +93,7 @@ void MenuScreenDraw()
   case 1:
     if (g_text_is_highlighted)
     {
-      DrawColorSquare({144, 312}, c_white, 504, 24);
+      DrawColorSquare({144, 312}, c_white, 504, 24, false);
       DrawText(147, 315, "4   KEMPSTON JOYSTICK", 30, c_black);
     }
     else
