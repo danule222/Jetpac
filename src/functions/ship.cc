@@ -1,10 +1,9 @@
 
 const int TotalSpritesNaves=12,PosicionNaveFija=768;
 int gravedadhola2=1,contadornave2,numerodegasofa;
-bool empezarnivelnave=true, ocupadonave=false;
+bool empezarnivelnave=true, ocupadonave=false,bajarnave;
 
 NaveJetpac *Nave;
-esat::Vec2 naveposxy={504,552};
 esat::SpriteHandle *spritesNave;
 
 //Inicializar los sprites de la nave
@@ -48,14 +47,16 @@ void AparicionNave(int nivel){
 			(Nave+0+((nivel/4) * 3))->pos.x=168;
 			(Nave+0+((nivel/4) * 3))->pos.y=192;
 			(Nave+0+((nivel/4) * 3))->estado=true;
-
+			printf("%d ",(0+((nivel/4) * 3)));
 			(Nave+1+((nivel/4) * 3))->pos.x=300;
 			(Nave+1+((nivel/4) * 3))->pos.y=300;
 			(Nave+1+((nivel/4) * 3))->estado=true;
+			printf("%d ",(1+((nivel/4) * 3)));
 
 			(Nave+2+((nivel/4) * 3))->pos.x=504;
 			(Nave+2+((nivel/4) * 3))->pos.y=504;
 			(Nave+2+((nivel/4) * 3))->estado=true;
+			printf("%d \n",(2+((nivel/4) * 3)));
 		}
 		empezarnivelnave=false;
 	}
@@ -75,7 +76,10 @@ void ShipDraw(){
 for(int i=0;i<TotalSpritesNaves;i++) {
     	if((Nave+i)->estado){
 				DrawColorSquare((Nave+i)->pos,c_white,48,48,true);
-				DrawColorSquare(naveposxy,c_magenta,48,-totalcaidafuel);
+				if(i==2 || i==5 || i==8 || i==11){
+					esat::Vec2 naveposxy={504,(Nave+i)->pos.y+48};
+					DrawColorSquare(naveposxy,c_magenta,48,-totalcaidafuel);
+				}
 		}
 	}
 	for(int i=0;i<TotalSpritesNaves;i++) {
@@ -120,18 +124,73 @@ void NaveCayendo(){
 }
 
 void PosFinalNave(int nivel){
-	int posy=408;
+	float posy=408;
+	float posy2=407;
 	for(int i=0;i<2;i++){
-		if((Nave+i+((nivel/4) * 3))->pos.y>=posy && (Nave+i+((nivel/4) * 3))->pos.x==504){
+		if((Nave+i+((nivel/4) * 3))->pos.y>=posy2 && (Nave+i+((nivel/4) * 3))->pos.y<=posy && (Nave+i+((nivel/4) * 3))->pos.x==504){
 			(Nave+i+((nivel/4) * 3))->posicionfinal=true;
 		}
 		posy+=48;
+		posy2+=48;
 	}
 	if((Nave+((nivel/4) * 3))->posicionfinal){
 		aparicionfuelPU=true;
 	}
 }
 
+void NaveDespegandop(){
+	if(subirnave){
+			for(int i=0;i<12;i++){
+				if((Nave+i)->estado)(Nave+i)->pos.y--; 
+				if((Nave+i)->pos.y<-20 && (Nave+i)->estado){
+					bajarnave=true;
+					if(g_player.nivel==3){
+					(Nave+0)->estado=false;
+					(Nave+1)->estado=false;
+					(Nave+2)->estado=false;
+					g_player.alive=true;
+					empezarnivelnave=true;
+					bajarnave=false;
+					}
+					if(g_player.nivel==7){
+					(Nave+3)->estado=false;
+					(Nave+4)->estado=false;
+					(Nave+5)->estado=false;
+					g_player.alive=true;
+					empezarnivelnave=true;
+					bajarnave=false;
+					}
+					if(g_player.nivel==11){
+					(Nave+6)->estado=false;
+					(Nave+7)->estado=false;
+					(Nave+8)->estado=false;
+					g_player.alive=true;
+					empezarnivelnave=true;
+					bajarnave=false;
+					}
+					g_player.nivel++;
+					totalcaidafuel=0;
+					subirnave=false;
+				}
+			}
+		}
+
+	if(bajarnave){
+		for(int i=0;i<12;i++){
+				if((Nave+i)->estado)(Nave+i)->pos.y++; 
+				if((Nave+i)->pos.y>504){
+					g_player.alive=true;
+					empezarnivelnave=true;
+					bajarnave=false;
+				}
+			}
+	}
+
+}
+
+void ControlarNiveles(){
+
+}
 
 void ShipStart(){
 	InicializarNaveJP();
@@ -140,10 +199,12 @@ void ShipStart(){
 
 
 void MovementsShip(){
-	AparicionNave(0);
+	AparicionNave(g_player.nivel);
 	MovimientoNave(g_player.pos.x,g_player.pos.y);
 	NaveCayendo();
-	PosFinalNave(0);
+	NaveDespegandop();
+	PosFinalNave(g_player.nivel);
+	ControlarNiveles();
 }
 
 void ShipEnd(){

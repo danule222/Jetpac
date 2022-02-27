@@ -1,7 +1,7 @@
 const int TotalSpritesPowerUps=6,TotalObjetos=6,TotalColores=12,pantallaxpowerups=768,posxnavep=500;
-int caracteristicaspowerup,contadoraparicionpowerups,contadorfuel,contadorfuel2,aparicionYpowerups=100,totalcaidafuel,colorespunum,contadorcolorfuel;
+int caracteristicaspowerup,contadoraparicionpowerups,contadorfuel,contadorfuel2,aparicionYpowerups=120,totalcaidafuel=0,colorespunum,contadorcolorfuel;
 float gravedadhola=1;
-bool mantenerfuel=false,caidaf=false,aparicionfuelPU=false;
+bool mantenerfuel=false,caidaf=false,aparicionfuelPU=false,activarvuelo=false,subirnave=false;
 Color diamantepowerups;
 powerups *objeto;
 esat::SpriteHandle spritefinal;
@@ -65,7 +65,7 @@ void ColoresPowerUps(){
 		(objeto+1)->color={c_yellow};
 		break;
 	case 13:
-		(objeto+1)->color={c_black};
+		(objeto+1)->color={c_red};
 		break;
 	case 14:
 		(objeto+1)->color={c_grey};
@@ -133,7 +133,10 @@ void GravedadPowerUp(){
 	//El PowerUp cae si no detecta colisiones
 	for(int i=0;i<TotalObjetos;i++){
 		if((objeto+i)->estado){
-			if(!(CheckCollision((objeto+i)->pos.x,(objeto+i)->pos.y,48,48,0,552,768,24) || CheckCollision((objeto+i)->pos.x,(objeto+i)->pos.y,48,48,96,216,144,24) || CheckCollision((objeto+i)->pos.x,(objeto+i)->pos.y,48,48,360,288,96,24) || CheckCollision((objeto+i)->pos.x,(objeto+i)->pos.y,48,48,576,144,144,24))){
+			if(!(CheckCollision((objeto+i)->pos.x,(objeto+i)->pos.y,48,48,0,552,768,24) ||
+			 CheckCollision((objeto+i)->pos.x,(objeto+i)->pos.y,48,48,96,216,144,24) ||
+				CheckCollision((objeto+i)->pos.x,(objeto+i)->pos.y,48,48,360,288,96,24) || 
+				CheckCollision((objeto+i)->pos.x,(objeto+i)->pos.y,48,48,576,144,144,24))){
 				(objeto+i)->pos.y+=gravedadhola;
 			}
 		}
@@ -179,7 +182,7 @@ void AparicionPowerUps(){
 	}
 	
 	//Si no hay ninguno en pantalla, hace spawnear a un PowerUp
-	if(vivo<1){
+	if(vivo<1 && totalcaidafuel<121){
 		contadoraparicionpowerups++;
 
 		if(contadoraparicionpowerups>(rand()%1000)+200){
@@ -196,7 +199,7 @@ void AparicionPowerUps(){
 	if(!(objeto)->estado){
 		contadorfuel++;
 		if(contadorfuel>121)contadorfuel=0;
-		if(contadorfuel>120 && aparicionfuelPU){
+		if(contadorfuel>120 && aparicionfuelPU && totalcaidafuel<121){
 			(objeto)->estado=true;
 			//Margen de aparición del powerup respecto a la x de la nave
 			int div2=rand()%2;
@@ -262,7 +265,12 @@ if((objeto)->pos.x>(486) && (objeto)->pos.x<(522)){
 	}
 }
 
-		
+	void ShipVolandop(float posjugx, float posjugy){
+		if(totalcaidafuel>120 && CheckCollision(504,504,48,144,posjugx,posjugy,48,72) && g_player.alive){
+			g_player.alive=false;
+			subirnave=true;
+		}
+	}
 		
 
 
@@ -274,6 +282,7 @@ void MovementsPowerUps(){
 	CaidaFuel();
 	MovimientoFuel(g_player.pos.x, g_player.pos.y);
 	DesaparicionPowerups(g_player.pos.x, g_player.pos.y);
+	ShipVolandop(g_player.pos.x, g_player.pos.y);
 }
 
 
