@@ -49,13 +49,13 @@ struct EnemNode
 #pragma region Nave
 
 struct powerups{
-esat::Vec2 pos;
-Color color;
-float gravedad=1;
-float contador;
-bool estado=false;
-int score;
-int numero;
+  esat::Vec2 pos;
+  Color color;
+  float gravedad=1;
+  float contador;
+  bool estado=false;
+  int score;
+  int numero;
 };
 
 #pragma endregion Nave

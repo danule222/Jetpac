@@ -26,10 +26,11 @@ void PlayUpdate()
 void PlayDraw()
 {
   EnemyDraw();
-  PowerUpsDraw();
+  
   DrawAssets();
+  PowerUpsDraw();
   DrawPlayer();
-
+  
   ScreenCommonDraw();
 }
 
