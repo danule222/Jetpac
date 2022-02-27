@@ -117,10 +117,13 @@ void InputPlayer()
             g_player.pos.x -= 5;
             g_player.sprite = 2; 
         }
-        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Space)) {
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Up)) {
                 if(g_player.grav > -3) {
                     g_player.grav -= 1.5;
                 }
+        }
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Space)) {
+            // AQUI EL DISPARO PERO NO ESTA
         }
         g_player.pos.y += g_player.grav;
 }
