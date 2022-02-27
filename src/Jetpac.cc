@@ -28,6 +28,9 @@
 #include "common/sound.cc"
 // Functions
 #include "functions/player.cc"
+#include "functions/power_ups.cc"
+#include "functions/ship.cc"
+
 #include "functions/enemy.cc"
 #include "functions/collisions.cc"
 #include "functions/save_game.cc"

@@ -44,15 +44,37 @@ struct EnemNode
   EnemNode *next;
 };
 
+struct Shot 
+{
+	esat::Vec2 pos;
+	bool alive;
+	int sprite;
+	int frame_counter;
+	int facing_right;
+};
+
 #pragma endregion Enemigos
 
 #pragma region Nave
 
-struct PowerUp
-{
+struct powerups{
   esat::Vec2 pos;
-  float gravedad;
+  Color color;
+  float gravedad=1;
   float contador;
+  bool estado=false;
+  int score;
+  int numero;
+};
+
+struct NaveJetpac{
+	esat::Vec2 pos;
+	float contador;
+	bool posicionfinal;
+	bool estado;
+	bool recoger=false;
+	bool mantenernave;
+	bool caidan;
 };
 
 #pragma endregion Nave

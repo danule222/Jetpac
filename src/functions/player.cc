@@ -26,6 +26,8 @@ void StartPlayerAssets()
     g_player.sprite = 18;
     g_player.pos.x = kWidth / 2;
     g_player.pos.y = kHeight - 100;
+    g_player.alive = true;
+    g_player.nivel = 0;
 
     g_floor_pointer = (Asset*)malloc(32 * sizeof(Asset));
     g_platform1 = (Asset*)malloc(6 * sizeof(Asset));
