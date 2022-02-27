@@ -45,8 +45,8 @@ void AparicionNave(int nivel){
 	//Dependiendo del nivel, asigna una posición a la nave
 	if(empezarnivelnave){
 		if(nivel%4==0){
-			(Nave+0+((nivel/4) * 3))->pos.x=200;
-			(Nave+0+((nivel/4) * 3))->pos.y=200;
+			(Nave+0+((nivel/4) * 3))->pos.x=168;
+			(Nave+0+((nivel/4) * 3))->pos.y=192;
 			(Nave+0+((nivel/4) * 3))->estado=true;
 
 			(Nave+1+((nivel/4) * 3))->pos.x=300;
@@ -70,8 +70,6 @@ bool RecogerNave(int numnave,float posjugx, float posjugy){
 				return false;
 			}
 	}
-
-
 
 void ShipDraw(){
 for(int i=0;i<TotalSpritesNaves;i++) {
@@ -128,6 +126,9 @@ void PosFinalNave(int nivel){
 			(Nave+i+((nivel/4) * 3))->posicionfinal=true;
 		}
 		posy+=48;
+	}
+	if((Nave+((nivel/4) * 3))->posicionfinal){
+		aparicionfuelPU=true;
 	}
 }
 

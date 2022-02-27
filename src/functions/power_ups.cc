@@ -1,8 +1,8 @@
 const int TotalSpritesPowerUps=6,TotalObjetos=6,TotalColores=12,pantallaxpowerups=768,posxnavep=500;
-int caracteristicaspowerup,contadoraparicionpowerups,contadorfuel,contadorfuel2,aparicionYpowerups=100,totalcaidafuel;
+int caracteristicaspowerup,contadoraparicionpowerups,contadorfuel,contadorfuel2,aparicionYpowerups=100,totalcaidafuel,colorespunum,contadorcolorfuel;
 float gravedadhola=1;
-bool mantenerfuel=false,caidaf=false;
-
+bool mantenerfuel=false,caidaf=false,aparicionfuelPU=false;
+Color diamantepowerups;
 powerups *objeto;
 esat::SpriteHandle spritefinal;
 esat::SpriteHandle *spritesPowerups;
@@ -22,6 +22,61 @@ void InicializarSpritesPowerUps(){
 		spritenum+=48;
 	}
 }
+
+
+void ColoresPowerUps(){
+
+	switch (colorespunum)
+	{
+	case 1:
+		(objeto+1)->color={c_cyan};
+		break;
+	case 2:
+		(objeto+1)->color={c_blue};
+		break;
+	case 3:
+		(objeto+1)->color={c_dark_red};
+		break;
+	case 4:
+		(objeto+1)->color={c_red};
+		break;
+	case 5:
+		(objeto+1)->color={c_dark_magenta};
+		break;
+	case 6:
+		(objeto+1)->color={c_magenta};
+		break;
+	case 7:
+		(objeto+1)->color={c_dark_green};
+		break;
+	case 8:
+		(objeto+1)->color={c_green};
+		break;
+	case 9:
+		(objeto+1)->color={c_dark_cyan};
+		break;
+	case 10:
+		(objeto+1)->color={c_cyan};
+		break;
+	case 11:
+		(objeto+1)->color={c_dark_yellow};
+		break;
+	case 12:
+		(objeto+1)->color={c_yellow};
+		break;
+	case 13:
+		(objeto+1)->color={c_black};
+		break;
+	case 14:
+		(objeto+1)->color={c_grey};
+		break;
+	case 15:
+		(objeto+1)->color={c_white};
+		break;	
+	}
+}
+
+
 
 //Inicializar las características de los Power Ups
 void InicializarPU(){
@@ -96,6 +151,10 @@ void PowerUpsDraw(){
     	if((objeto+i)->estado){
 				if((objeto+i)->numero==1 || (objeto+i)->numero==5){
 					if((objeto+i)->numero==1){
+						contadorcolorfuel++;
+						if(contadorcolorfuel>450)contadorcolorfuel=0;
+						if(colorespunum>15)colorespunum=0;
+						if(contadorcolorfuel%5==0)colorespunum++;
 					DrawColorSquare((objeto+i)->pos,(objeto+i)->color,48,48,true);
 					esat::DrawSprite(*(spritesPowerups+i),(objeto+i)->pos.x,(objeto+i)->pos.y);
 					}
@@ -113,7 +172,6 @@ void PowerUpsDraw(){
 
 
 void AparicionPowerUps(){
-
 	//Comprueba el num de PowerUps en pantalla
 	int vivo=0;
 	for(int i=1;i<TotalObjetos;i++){
@@ -137,7 +195,8 @@ void AparicionPowerUps(){
 	//Aparición del fuel por separado
 	if(!(objeto)->estado){
 		contadorfuel++;
-		if(contadorfuel>120){
+		if(contadorfuel>121)contadorfuel=0;
+		if(contadorfuel>120 && aparicionfuelPU){
 			(objeto)->estado=true;
 			//Margen de aparición del powerup respecto a la x de la nave
 			int div2=rand()%2;
@@ -147,7 +206,6 @@ void AparicionPowerUps(){
 				(objeto)->pos.x=(700-(rand()%150));
 			}
 			(objeto)->pos.y=aparicionYpowerups;
-			contadorfuel=0;
 		}
 	}
 }
@@ -210,6 +268,7 @@ if((objeto)->pos.x>(486) && (objeto)->pos.x<(522)){
 
 
 void MovementsPowerUps(){
+	ColoresPowerUps();
 	AparicionPowerUps();
 	GravedadPowerUp();
 	CaidaFuel();
