@@ -74,14 +74,17 @@ bool RecogerNave(int numnave,float posjugx, float posjugy){
 
 
 void ShipDraw(){
+for(int i=0;i<TotalSpritesNaves;i++) {
+    	if((Nave+i)->estado){
+				DrawColorSquare((Nave+i)->pos,c_white,48,48,true);
+				DrawColorSquare(naveposxy,c_magenta,48,-totalcaidafuel);
+		}
+	}
 	for(int i=0;i<TotalSpritesNaves;i++) {
     	if((Nave+i)->estado){
-        DrawColorSquare((Nave+i)->pos,c_white,48,48,true);
-        DrawColorSquare(naveposxy,c_magenta,48,-totalcaidafuel);
 				esat::DrawSprite(*(spritesNave+i),(Nave+i)->pos.x,(Nave+i)->pos.y);
 		}
 	}
-  
 }
 
 
