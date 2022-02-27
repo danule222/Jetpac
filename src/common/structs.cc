@@ -68,6 +68,7 @@ struct Jugador
   bool alive;
   bool explode;
   int sprite;
+  int feet; // int
   int score;
   int nivel;
 };

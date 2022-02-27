@@ -8,7 +8,13 @@
 esat::SpriteHandle *g_sprites_jugador, *g_sprites_assets;
 Jugador g_player;
 Asset *g_floor_pointer;
-Asset *g_platform1, *g_platform2, *g_platform3; 
+Asset *g_platform1, *g_platform2, *g_platform3;
+int contadorFeetR = 3;
+int contadorFeetL = 19;
+int contadorRIGHT = 0;
+int contadorLEFT = 0;
+
+int HOLAP;
 // bool g_grav = true;
 
 void StartPlayerAssets()
@@ -92,12 +98,13 @@ void InitSpritesPlayerAssets()
     int sprite_count = 0;
     g_sprites_assets = (esat::SpriteHandle *)malloc(3 * sizeof(esat::SpriteHandle));
     g_sprites_jugador = (esat::SpriteHandle *)malloc(70 * sizeof(esat::SpriteHandle));
-    for (int i = 0; i < 35; ++i)
+    for (int i = 0; i < 20; ++i)
     {
         *(g_sprites_jugador + sprite_count) = esat::SubSprite(g_spritesheet, i * 48, 96, 48, 48);
         ++sprite_count;
+
     }
-    for (int j = 0; j < 35; ++j)
+    for (int j = 0; j < 20; ++j)
     {
         *(g_sprites_jugador + sprite_count) = esat::SubSprite(g_spritesheet, j * 48, 144, 48, 48);
         ++sprite_count;
@@ -109,15 +116,42 @@ void InitSpritesPlayerAssets()
 
 void InputPlayer()
 {
-        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Right)) {
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Right) && CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) ||
+         esat::IsSpecialKeyPressed(esat::kSpecialKey_Left) && CheckCollision(96,216,144,24, g_player.pos.x, g_player.pos.y, 48, 72)) {
             g_player.pos.x += 5;
-            g_player.sprite = 18;
+            g_player.sprite = 18; 
+            contadorRIGHT++;
+                if(contadorRIGHT >= 5) {
+                    if(contadorFeetR  >= 25) {
+                        contadorFeetR = 19;
+                    }
+                    contadorFeetR += 2;
+                    contadorRIGHT = 0;
+                }
         }
-        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Left)) {
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Right) && !CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) && !CheckCollision(96,216,144,24, g_player.pos.x, g_player.pos.y, 48, 72)) {
+            g_player.pos.x += 5;
+            g_player.sprite = 26;
+        }
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Left) && CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) ||
+         esat::IsSpecialKeyPressed(esat::kSpecialKey_Left) && !CheckCollision(96,216,144,24, g_player.pos.x, g_player.pos.y, 48, 72)) {
             g_player.pos.x -= 5;
             g_player.sprite = 2; 
+            contadorLEFT++;
+                if(contadorLEFT >= 5) {
+                    if(contadorFeetL >= 9) {
+                        contadorFeetL = 3;
+                    }
+                    contadorFeetL += 2;
+                    contadorLEFT = 0;
+                }
         }
-        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Up)) {
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Left) && !CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) && !CheckCollision(96,216,144,24, g_player.pos.x, g_player.pos.y, 48, 72)) {
+            g_player.pos.x -= 1;
+            g_player.sprite = 10; 
+        }
+
+        if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Up) && !CheckCollision(96,216,144,40, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.pos.y > 55) {
                 if(g_player.grav > -3) {
                     g_player.grav -= 1.5;
                 }
@@ -131,10 +165,18 @@ void InputPlayer()
 
 void PlayerCollision()
 {
-    if (CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72))
+    if (CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) )
     {
         g_player.grav = 0;
         g_player.pos.y = 480;
+    }
+    if(CheckCollision(96, 216, 144, 24, g_player.pos.x, g_player.pos.y, 48, 72)) {
+        if(g_player.pos.y <= 146 && g_player.pos.x >= 95 && g_player.pos.x <= 145) {
+            g_player.grav = 0;
+            g_player.pos.y = 144;
+            printf("\n ADIOS");
+        }
+        printf("HOLA");
     }
     else
     {
@@ -143,10 +185,15 @@ void PlayerCollision()
             g_player.grav += 0.5;
         }
     }
-    // if(CollisionEnemyWihtPlayer((g_player).pos.x, (g_player).pos.y, 48, 72)) {
-    //     (g_player)->alive = false;
-    // }
+    /*
+    if(CollisionEnemyWihtPlayer((g_player)->pos.x, (g_player)->pos.y, 48, 72)) {
+         (g_player)->alive = false;
+    }
+    */
 }
+
+//         
+//       
 
 
 void DrawAssets()
@@ -175,13 +222,24 @@ void DrawAssets()
 
 void DrawPlayer()
 {
-    // if((g_player)->alive) {
-        esat::Vec2 pos_masc_player = {g_player.pos.x, g_player.pos.y};
-        DrawColorSquare(pos_masc_player, c_white, 48, 69);
+    esat::Vec2 pos_masc_player = {g_player.pos.x, g_player.pos.y};
+    DrawColorSquare(pos_masc_player, c_white, 48, 69);
+    if(!CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72)) {
         esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
         esat::DrawSprite(*(g_sprites_jugador + g_player.sprite + 1), g_player.pos.x, g_player.pos.y + 47);
-    // }
+    }
+    if(CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.sprite < 18) {
+        esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
+        esat::DrawSprite(*(g_sprites_jugador + contadorFeetL), g_player.pos.x, g_player.pos.y + 47);
+    }
+    if(CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.sprite >= 18) {
+        esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
+        esat::DrawSprite(*(g_sprites_jugador + contadorFeetR), g_player.pos.x, g_player.pos.y + 47);
+    }
 }
+
+//  || !CheckCollision(96,216,144,24, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.sprite <= 18
+//   || !CheckCollision(96,216,144,24, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.sprite >= 18
 
 void EndPlayer()
 {

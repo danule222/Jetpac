@@ -46,6 +46,7 @@ bool CollisionEnemyWihtPlayer(float x, float y, float w, float h)
 
 void CalculateCollision()
 {
+    CollisionEnemyWihtPlayer(g_player.pos.x, g_player.pos.y, 48, 72);
     /**
      * Example of collision wiht a shot,
      * this shot now is the mouse but it
@@ -58,7 +59,7 @@ void CalculateCollision()
      * square or rectangle.
      *
      */
-    // if(esat::MouseButtonDown(0)){
-    //     CollisionEnemyWihtShot(esat::MousePositionX(), esat::MousePositionY(), 1, 1);
-    // }
+// if(esat::MouseButtonDown(0)){
+//     CollisionEnemyWihtShot(esat::MousePositionX(), esat::MousePositionY(), 1, 1);
+// }
 }
