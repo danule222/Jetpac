@@ -14,6 +14,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+// SoLoud
+#include <esat_extra/soloud/soloud.h>
+#include <esat_extra/soloud/soloud_wav.h>
 
 // Personal includes
 // Common
@@ -21,12 +24,16 @@
 #include "common/definitions.cc"
 #include "common/lists_enems.cc"
 #include "common/utils.cc"
+#include "common/math.cc"
+#include "common/sound.cc"
 // Functions
-#include "functions/enemy.cc"
 #include "functions/player.cc"
 #include "functions/power_ups.cc"
 #include "functions/ship.cc"
 
+#include "functions/enemy.cc"
+#include "functions/collisions.cc"
+#include "functions/save_game.cc"
 // Screens
 #include "screens/common.cc"
 #include "screens/loading.cc"

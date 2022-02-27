@@ -31,8 +31,8 @@ struct Enemy
   esat::Vec2 dir;
   Color color;
   float speed;
-  bool alive;
   bool explode;
+  bool spawn;
   int explode_counter;
   int sprite;
   int animation_counter;
@@ -72,7 +72,7 @@ struct NaveJetpac{
 
 #pragma region Jugador
 
-struct Jugador 
+struct Jugador
 {
   esat::Vec2 pos;
   Color color;
@@ -98,3 +98,13 @@ struct Asset
 
 #pragma endregion asset
 
+#pragma region SaveGame
+
+struct TSaveGame
+{
+  Game game_state;
+  struct tm date;
+  int p1_score, p2_score;
+};
+
+#pragma endregion SaveGame
