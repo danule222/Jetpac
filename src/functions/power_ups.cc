@@ -86,11 +86,7 @@ void GravedadPowerUp(){
 }
 
 
-void MovimientoPowerupJugador(float posjx, float posjy){
-	//Función para cuando el Fuel toque al jugador para que se mueva con el jugador
-	(objeto)->pos.x=posjx;
-	(objeto)->pos.y=posjy;
-}
+
 
 // {(objeto+i)->pos.x,(objeto+i)->pos.y}
 
@@ -148,7 +144,7 @@ void AparicionPowerUps(){
 			if(div2==1 || div2==2){
 				(objeto)->pos.x=rand()%475;
 			}else{
-				(objeto)->pos.x=(700-(rand()%180));
+				(objeto)->pos.x=(700-(rand()%150));
 			}
 			(objeto)->pos.y=aparicionYpowerups;
 			contadorfuel=0;
@@ -201,7 +197,7 @@ if((objeto)->pos.x>(486) && (objeto)->pos.x<(522)){
 		(objeto)->pos.y+=gravedadhola;
 
 		if((objeto)->pos.x==504 && (objeto)->pos.y>=504){
-			if((objeto)->estado)totalcaidafuel++;
+			if((objeto)->estado)totalcaidafuel+=24;
 			(objeto)->estado=false;
 			caidaf=false;
 		}

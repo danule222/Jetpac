@@ -25,6 +25,8 @@
 #include "functions/enemy.cc"
 #include "functions/player.cc"
 #include "functions/power_ups.cc"
+#include "functions/ship.cc"
+
 // Screens
 #include "screens/common.cc"
 #include "screens/loading.cc"

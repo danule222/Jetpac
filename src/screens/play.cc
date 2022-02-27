@@ -17,8 +17,9 @@ void PlayInput()
 void PlayUpdate()
 {
   EnemyUpdate();
-  MovementsPowerUps();
+  MovementsShip();
   PlayerCollision();
+  MovementsPowerUps();
 
   ScreenCommonUpdate();
 }
@@ -26,8 +27,9 @@ void PlayUpdate()
 void PlayDraw()
 {
   EnemyDraw();
-  
+
   DrawAssets();
+  ShipDraw();
   PowerUpsDraw();
   DrawPlayer();
   

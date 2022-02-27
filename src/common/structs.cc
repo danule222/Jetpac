@@ -58,6 +58,16 @@ struct powerups{
   int numero;
 };
 
+struct NaveJetpac{
+	esat::Vec2 pos;
+	float contador;
+	bool posicionfinal;
+	bool estado;
+	bool recoger=false;
+	bool mantenernave;
+	bool caidan;
+};
+
 #pragma endregion Nave
 
 #pragma region Jugador

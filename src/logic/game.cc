@@ -18,6 +18,7 @@ void InitializeGame()
   StartMenuScreen();
   EnemyStart();
   PowerUpsStart();
+  ShipStart();
 }
 
 void FinalizeGame()
@@ -27,6 +28,7 @@ void FinalizeGame()
   EndLoadingScreen();
   EndScreenCommon();
   EndPlayer();
+  ShipEnd();
 
   esat::SpriteRelease(g_spritesheet);
 }
