@@ -6,7 +6,7 @@
  */
 
 void DrawColorSquare(esat::Vec2 pos, Color color, int width,
-                     int height, bool stroke = false)
+                     int height, bool stroke = true)
 {
   float *vertices = nullptr;
 
@@ -27,6 +27,7 @@ void DrawColorSquare(esat::Vec2 pos, Color color, int width,
   *(vertices + 8) = pos.x;
   *(vertices + 9) = pos.y;
 
+  esat::DrawSetStrokeColor(0, 0, 0);
   esat::DrawSetFillColor(color.r, color.g, color.b, color.alpha);
   esat::DrawSolidPath(vertices, 5, stroke);
 
