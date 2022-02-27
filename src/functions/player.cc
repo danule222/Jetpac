@@ -108,7 +108,8 @@ void DrawAssets()
 
 void DrawPlayer()
 {
-    if(g_player.alive){
+    if (g_player.alive)
+    {
         esat::Vec2 pos_masc_player = {g_player.pos.x, g_player.pos.y};
         DrawColorSquare(pos_masc_player, c_white, 48, 69);
         esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
