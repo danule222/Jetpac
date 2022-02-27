@@ -44,6 +44,15 @@ struct EnemNode
   EnemNode *next;
 };
 
+struct Shot 
+{
+	esat::Vec2 pos;
+	bool alive;
+	int sprite;
+	int frame_counter;
+	int facing_right;
+};
+
 #pragma endregion Enemigos
 
 #pragma region Nave
