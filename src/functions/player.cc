@@ -327,7 +327,7 @@ void DrawPlayer()
     {
         esat::Vec2 pos_masc_player = {g_player.pos.x, g_player.pos.y};
         DrawColorSquare(pos_masc_player, c_white, 48, 69);
-    }
+    
     if (!CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72))
     {
         esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
@@ -342,6 +342,7 @@ void DrawPlayer()
     {
         esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
         esat::DrawSprite(*(g_sprites_jugador + contadorFeetR), g_player.pos.x, g_player.pos.y + 47);
+    }
     }
 }
 

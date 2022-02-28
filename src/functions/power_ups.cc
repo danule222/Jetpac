@@ -1,5 +1,5 @@
 const int TotalSpritesPowerUps = 6, TotalObjetos = 6, TotalColores = 12, pantallaxpowerups = 768, posxnavep = 500;
-int caracteristicaspowerup, contadoraparicionpowerups, contadorfuel, contadorfuel2, aparicionYpowerups = 120, totalcaidafuel = 0, colorespunum, contadorcolorfuel;
+int caracteristicaspowerup, contadoraparicionpowerups, contadorfuel, contadorfuel2, aparicionYpowerups = 90, totalcaidafuel = 0, colorespunum, contadorcolorfuel;
 float gravedadhola = 1;
 bool mantenerfuel = false, caidaf = false, aparicionfuelPU = false, activarvuelo = false, subirnave = false;
 Color diamantepowerups;
