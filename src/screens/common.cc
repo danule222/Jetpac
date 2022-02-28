@@ -5,7 +5,6 @@
  * las diferentes pantallas.
  */
 
-bool g_p1_playing = true;
 char g_score_1[] = {"000000\0"};
 char g_score_2[] = {"000000\0"};
 char g_hiScore[] = {"000000\0"};

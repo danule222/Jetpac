@@ -44,38 +44,40 @@ struct EnemNode
   EnemNode *next;
 };
 
-struct Shot 
+struct Shot
 {
-	esat::Vec2 pos;
-	bool alive;
-	int sprite;
-	int frame_counter;
-	int facing_right;
-	int color;
+  esat::Vec2 pos;
+  bool alive;
+  int sprite;
+  int frame_counter;
+  int facing_right;
+  int color;
 };
 
 #pragma endregion Enemigos
 
 #pragma region Nave
 
-struct powerups{
+struct powerups
+{
   esat::Vec2 pos;
   Color color;
-  float gravedad=1;
+  float gravedad = 1;
   float contador;
-  bool estado=false;
+  bool estado = false;
   int score;
   int numero;
 };
 
-struct NaveJetpac{
-	esat::Vec2 pos;
-	float contador;
-	bool posicionfinal;
-	bool estado;
-	bool recoger=false;
-	bool mantenernave;
-	bool caidan;
+struct NaveJetpac
+{
+  esat::Vec2 pos;
+  float contador;
+  bool posicionfinal;
+  bool estado;
+  bool recoger = false;
+  bool mantenernave;
+  bool caidan;
 };
 
 #pragma endregion Nave
@@ -96,6 +98,7 @@ struct Jugador
   int nivel;
   int contDisp;
   bool puedeDisp;
+  int lifes;
 };
 
 #pragma endregion Jugador

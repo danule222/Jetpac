@@ -4,6 +4,9 @@
  * @brief Funciones de colisiones del juego.
  */
 
+double g_player_dead_time;
+bool g_dead_player = false;
+
 bool CollisionEnemyWihtShot(float x, float y, float w, float h)
 {
     EnemNode *aux_enemy;
@@ -75,17 +78,76 @@ void CalculateCollision()
      * square or rectangle.
      *
      */
-// if(esat::MouseButtonDown(0)){
-//     CollisionEnemyWihtShot(esat::MousePositionX(), esat::MousePositionY(), 1, 1);
-// }
-  
-for(int i = 0; i < 5; i++)
-	{
-		if(CollisionEnemyWihtShot((shots + i)->pos.x, (shots + i)->pos.y, 24, 3))
-		{
-			(shots + i)->alive = false;
-			(shots + i)->pos.x = 0;
-			(shots + i)->pos.y = 0;
-		}
-	}
+    // if(esat::MouseButtonDown(0)){
+    //     CollisionEnemyWihtShot(esat::MousePositionX(), esat::MousePositionY(), 1, 1);
+    // }
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (CollisionEnemyWihtShot((shots + i)->pos.x, (shots + i)->pos.y, 24, 3))
+        {
+            (shots + i)->alive = false;
+            (shots + i)->pos.x = 0;
+            (shots + i)->pos.y = 0;
+        }
+    }
+
+    if (CollisionEnemyWihtPlayer(g_player.pos.x, g_player.pos.y, 50, 70) && g_player.alive)
+    {
+        Jugador aux;
+        g_dead_player = true;
+        g_player_dead_time = esat::Time();
+
+        g_player.alive = false;
+        g_player.lifes--;
+
+        // Cambiar jugador
+        if (g_game_properties.players == 2)
+        {
+            g_p1_playing = !g_p1_playing;
+
+            aux.nivel = g_player.nivel;
+            aux.score = g_player.score;
+            aux.lifes = g_player.lifes;
+
+            g_player.nivel = g_player_aux.nivel;
+            g_player.score = g_player_aux.score;
+            g_player.lifes = g_player_aux.lifes;
+
+            g_player_aux.nivel = aux.nivel;
+            g_player_aux.score = aux.score;
+            g_player_aux.lifes = aux.lifes;
+        }
+
+        if (g_player.lifes == 0)
+        {
+            g_game_properties.state = 1;
+            g_player.lifes = 3;
+            g_player.score = 0;
+
+            g_player_aux.lifes = 3;
+            g_player_aux.score = 0;
+            g_player_aux.pos.x = kWidth / 2;
+            g_player_aux.pos.y = kHeight - 100;
+
+            g_player.alive = true;
+            g_player_aux.alive = true;
+
+            g_score_2[] = {"000000\0"};
+        }
+
+        g_player.pos.x = kWidth / 2;
+        g_player.pos.y = kHeight - 100;
+    }
+
+    if (g_dead_player)
+    {
+        printf("%lf\n", g_player_dead_time);
+        if (esat::Time() - g_player_dead_time >= 1000 * 3)
+        {
+            printf("B");
+            g_player.alive = true;
+            g_dead_player = false;
+        }
+    }
 }

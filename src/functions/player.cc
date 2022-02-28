@@ -6,7 +6,7 @@
  */
 
 esat::SpriteHandle *g_sprites_jugador, *g_sprites_assets;
-Jugador g_player;
+Jugador g_player, g_player_aux;
 Asset *g_floor_pointer;
 Asset *g_platform1, *g_platform2, *g_platform3;
 int contadorFeetR = 3;
@@ -14,6 +14,7 @@ int contadorFeetL = 19;
 int contadorRIGHT = 0;
 int contadorLEFT = 0;
 int contadorVivo = 0;
+bool g_p1_playing = true;
 
 int HOLAP;
 // bool g_grav = true;
@@ -24,12 +25,22 @@ void StartPlayerAssets()
     int contador = 0;
     int contador2 = 0;
     int contador3 = 0;
+
     g_player.sprite = 18;
     g_player.pos.x = kWidth / 2;
     g_player.pos.y = kHeight - 100;
     g_player.alive = true;
     g_player.nivel = 0;
     g_player.score = 0;
+    g_player.lifes = 3;
+
+    g_player_aux.sprite = 18;
+    g_player_aux.pos.x = kWidth / 2;
+    g_player_aux.pos.y = kHeight - 100;
+    g_player_aux.alive = false;
+    g_player_aux.nivel = 0;
+    g_player_aux.score = 0;
+    g_player_aux.lifes = 3;
 
     g_floor_pointer = (Asset *)malloc(32 * sizeof(Asset));
     g_platform1 = (Asset *)malloc(6 * sizeof(Asset));
