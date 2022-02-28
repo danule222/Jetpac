@@ -53,12 +53,12 @@ void AparicionNave(int nivel)
 	{
 		if (nivel % 4 == 0)
 		{
-			(Nave + 0 + ((nivel / 4) * 3))->pos.x = 168;
-			(Nave + 0 + ((nivel / 4) * 3))->pos.y = 192;
+			(Nave + 0 + ((nivel / 4) * 3))->pos.x = 140;
+			(Nave + 0 + ((nivel / 4) * 3))->pos.y = 168;
 			(Nave + 0 + ((nivel / 4) * 3))->estado = true;
 
-			(Nave + 1 + ((nivel / 4) * 3))->pos.x = 300;
-			(Nave + 1 + ((nivel / 4) * 3))->pos.y = 300;
+			(Nave + 1 + ((nivel / 4) * 3))->pos.x = 384;
+			(Nave + 1 + ((nivel / 4) * 3))->pos.y = 240;
 			(Nave + 1 + ((nivel / 4) * 3))->estado = true;
 
 			(Nave + 2 + ((nivel / 4) * 3))->pos.x = 504;
