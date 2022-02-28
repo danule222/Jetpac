@@ -29,6 +29,7 @@ void StartPlayerAssets()
     g_player.pos.y = kHeight - 100;
     g_player.alive = true;
     g_player.nivel = 0;
+    g_player.score = 0;
 
     g_floor_pointer = (Asset *)malloc(32 * sizeof(Asset));
     g_platform1 = (Asset *)malloc(6 * sizeof(Asset));
@@ -262,35 +263,34 @@ void PlayerCollision()
 
 void PlayerShot()
 {
-	if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Space) && g_player.puedeDisp)
-	{
-		if(g_player.sprite < 18)
-		{
-			g_player.puedeDisp = false;
-			SpawnShot(g_player.pos.x - 24, g_player.pos.y + 30, false);
-		}
-		
-		else
-		{
-			g_player.puedeDisp = false;
-			SpawnShot(g_player.pos.x + 48, g_player.pos.y + 30, true);
-		}
-		
-	}
+    if (esat::IsSpecialKeyPressed(esat::kSpecialKey_Space) && g_player.puedeDisp)
+    {
+        if (g_player.sprite < 18)
+        {
+            g_player.puedeDisp = false;
+            SpawnShot(g_player.pos.x - 24, g_player.pos.y + 30, false);
+        }
+
+        else
+        {
+            g_player.puedeDisp = false;
+            SpawnShot(g_player.pos.x + 48, g_player.pos.y + 30, true);
+        }
+    }
 }
 
 void IncreaseCounter()
 {
-	if(!g_player.puedeDisp)
-	{
-		g_player.contDisp++;
-	}
-	
-	if(g_player.contDisp > 12)
-	{
-		g_player.puedeDisp = true;
-		g_player.contDisp = 0;
-	}
+    if (!g_player.puedeDisp)
+    {
+        g_player.contDisp++;
+    }
+
+    if (g_player.contDisp > 12)
+    {
+        g_player.puedeDisp = true;
+        g_player.contDisp = 0;
+    }
 }
 
 void DrawAssets()
@@ -327,22 +327,22 @@ void DrawPlayer()
     {
         esat::Vec2 pos_masc_player = {g_player.pos.x, g_player.pos.y};
         DrawColorSquare(pos_masc_player, c_white, 48, 69);
-    
-    if (!CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72))
-    {
-        esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
-        esat::DrawSprite(*(g_sprites_jugador + g_player.sprite + 1), g_player.pos.x, g_player.pos.y + 47);
-    }
-    if (CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.sprite < 18)
-    {
-        esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
-        esat::DrawSprite(*(g_sprites_jugador + contadorFeetL), g_player.pos.x, g_player.pos.y + 47);
-    }
-    if (CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.sprite >= 18)
-    {
-        esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
-        esat::DrawSprite(*(g_sprites_jugador + contadorFeetR), g_player.pos.x, g_player.pos.y + 47);
-    }
+
+        if (!CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72))
+        {
+            esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
+            esat::DrawSprite(*(g_sprites_jugador + g_player.sprite + 1), g_player.pos.x, g_player.pos.y + 47);
+        }
+        if (CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.sprite < 18)
+        {
+            esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
+            esat::DrawSprite(*(g_sprites_jugador + contadorFeetL), g_player.pos.x, g_player.pos.y + 47);
+        }
+        if (CheckCollision(0, 552, 768, 24, g_player.pos.x, g_player.pos.y, 48, 72) && g_player.sprite >= 18)
+        {
+            esat::DrawSprite(*(g_sprites_jugador + g_player.sprite), g_player.pos.x, g_player.pos.y);
+            esat::DrawSprite(*(g_sprites_jugador + contadorFeetR), g_player.pos.x, g_player.pos.y + 47);
+        }
     }
 }
 

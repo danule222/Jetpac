@@ -7,7 +7,7 @@
 
 void InitializeGame()
 {
-  g_game_properties = {0, 0, 1, 0};
+  g_game_properties = {0, 1, 1, 0};
   g_spritesheet = esat::SpriteFromFile("../assets/spritesheet.png");
   esat::DrawSetTextFont("../assets/zx_spectrum-7.ttf");
 
