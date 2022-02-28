@@ -140,10 +140,8 @@ void CalculateCollision()
 
     if (g_dead_player)
     {
-        printf("%lf\n", g_player_dead_time);
         if (esat::Time() - g_player_dead_time >= 1000 * 3)
         {
-            printf("B");
             g_player.alive = true;
             g_dead_player = false;
         }
