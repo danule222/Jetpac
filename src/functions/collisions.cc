@@ -132,8 +132,6 @@ void CalculateCollision()
 
             g_player.alive = true;
             g_player_aux.alive = true;
-
-            g_score_2[] = {"000000\0"};
         }
 
         g_player.pos.x = kWidth / 2;
