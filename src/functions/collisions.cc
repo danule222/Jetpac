@@ -53,14 +53,14 @@ void CalculateCollision()
     */
     /*
     for(int i = 0; i < 5; i++)
-	{
-		if(CollisionEnemyWihtShot((shots + i)->pos.x, (shots + i)->pos.y, (shots + i)->pos.x + 24, (shots + i)->pos.y + 3))
-		{
-			(shots + i)->alive = false;
-			(shots + i)->pos.x = 0;
-			(shots + i)->pos.y = 0;
-		}
-	}
+    {
+        if(CollisionEnemyWihtShot((shots + i)->pos.x, (shots + i)->pos.y, (shots + i)->pos.x + 24, (shots + i)->pos.y + 3))
+        {
+            (shots + i)->alive = false;
+            (shots + i)->pos.x = 0;
+            (shots + i)->pos.y = 0;
+        }
+    }
     */
     CollisionEnemyWihtShot(10, 10, 24, 3);
     /**
@@ -75,7 +75,7 @@ void CalculateCollision()
      * square or rectangle.
      *
      */
-// if(esat::MouseButtonDown(0)){
-//     CollisionEnemyWihtShot(esat::MousePositionX(), esat::MousePositionY(), 1, 1);
-// }
+    // if(esat::MouseButtonDown(0)){
+    //     CollisionEnemyWihtShot(esat::MousePositionX(), esat::MousePositionY(), 1, 1);
+    // }
 }

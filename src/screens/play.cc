@@ -31,7 +31,7 @@ void PlayDraw()
   ShipDraw();
   PowerUpsDraw();
   DrawPlayer();
-  
+
   ScreenCommonDraw();
 }
 
