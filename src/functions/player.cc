@@ -234,7 +234,40 @@ void PlayerCollision()
 }
 
 //         
-//       
+//
+
+void PlayerShot()
+{
+	if(esat::IsSpecialKeyPressed(esat::kSpecialKey_Space) && g_player.puedeDisp)
+	{
+		if(g_player.sprite < 18)
+		{
+			g_player.puedeDisp = false;
+			SpawnShot(g_player.pos.x - 24, g_player.pos.y + 30, false);
+		}
+		
+		else
+		{
+			g_player.puedeDisp = false;
+			SpawnShot(g_player.pos.x + 48, g_player.pos.y + 30, true);
+		}
+		
+	}
+}
+
+void IncreaseCounter()
+{
+	if(!g_player.puedeDisp)
+	{
+		g_player.contDisp++;
+	}
+	
+	if(g_player.contDisp > 12)
+	{
+		g_player.puedeDisp = true;
+		g_player.contDisp = 0;
+	}
+}
 
 
 void DrawAssets()

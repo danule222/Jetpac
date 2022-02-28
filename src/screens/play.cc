@@ -8,8 +8,8 @@
 void PlayInput()
 {
   InputPlayer();
-
   ScreenCommonInput();
+  PlayerShot();
 }
 
 void PlayUpdate()
@@ -19,19 +19,19 @@ void PlayUpdate()
   PlayerCollision();
   MovementsPowerUps();
   CalculateCollision();
-
+  IncreaseCounter();
   ScreenCommonUpdate();
+  MoveShots();
 }
 
 void PlayDraw()
 {
   EnemyDraw();
-
   DrawAssets();
   ShipDraw();
   PowerUpsDraw();
   DrawPlayer();
-  
+  DrawShotSprites();
   ScreenCommonDraw();
 }
 
