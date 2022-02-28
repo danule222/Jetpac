@@ -32,6 +32,7 @@ void PlayDraw()
   PowerUpsDraw();
   DrawPlayer();
   DrawShotSprites();
+  
   ScreenCommonDraw();
 }
 

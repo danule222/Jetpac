@@ -12,41 +12,49 @@ double g_last_spawn_time, g_current_spawn_time;
 double g_enemy_spawn_time = 0.5;
 int g_enemy_in_window = 6;
 
-static int SelectEnemyType(){
+static int SelectEnemyType()
+{
     int enemy_type = g_player.nivel % 8;
-    switch(enemy_type){
-        case 0:
-            return 0;
-            break;
-        case 1:
-             return 2;
-            break;
-        case 2:
-            return 4;
-            break;
-        case 6:
-            if((rand() % 2) == 0){
-                return 6;
-            }else{
-                return 7;
-            }
-            break;
-        case 3:
-            if((rand() % 2) == 0){
-                return 8;
-            }else{
-                return 9;
-            }
-            break;
-        case 7:
-            return 10;
-            break;
-        case 5:
-            return 11;
-            break;
-        case 4:
-            return 12;
-            break;
+    switch (enemy_type)
+    {
+    case 0:
+        return 0;
+        break;
+    case 1:
+        return 2;
+        break;
+    case 2:
+        return 4;
+        break;
+    case 6:
+        if ((rand() % 2) == 0)
+        {
+            return 6;
+        }
+        else
+        {
+            return 7;
+        }
+        break;
+    case 3:
+        if ((rand() % 2) == 0)
+        {
+            return 8;
+        }
+        else
+        {
+            return 9;
+        }
+        break;
+    case 7:
+        return 10;
+        break;
+    case 5:
+        return 11;
+        break;
+    case 4:
+        return 12;
+        break;
     }
     return 0;
 }
@@ -139,7 +147,7 @@ static void ConstuctEnemy()
             aux_enemy.dir.x = 1;
             aux_enemy.dir.y = 0;
             aux_enemy.speed = 3;
-           aux_enemy.dir =  Vec2Normalize(&aux_enemy.dir);
+            aux_enemy.dir = Vec2Normalize(&aux_enemy.dir);
             break;
         case 10:
             aux_enemy.pos.x = 1.0f;
@@ -239,25 +247,29 @@ static void MovementRules(Enemy *enemy)
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           96, 216, 144, 24)){
+                           96, 216, 144, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           576, 144, 144, 24)){
+                           576, 144, 144, 24))
+        {
             enemy->sprite = 0;
             enemy->explode = true;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           360, 288, 96, 24)){
+                           360, 288, 96, 24))
+        {
             enemy->sprite = 0;
             enemy->explode = true;
         }
-        if((enemy->pos.y + 30) >= (576 - 30)){
+        if ((enemy->pos.y + 30) >= (576 - 30))
+        {
             enemy->sprite = 0;
             enemy->explode = true;
         }
@@ -270,25 +282,29 @@ static void MovementRules(Enemy *enemy)
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           96, 216, 144, 24)){
+                           96, 216, 144, 24))
+        {
             enemy->sprite = 0;
             enemy->explode = true;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           576, 144, 144, 24)){
+                           576, 144, 144, 24))
+        {
             enemy->sprite = 0;
             enemy->explode = true;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           360, 288, 96, 24)){
+                           360, 288, 96, 24))
+        {
             enemy->sprite = 0;
             enemy->explode = true;
         }
-        if((enemy->pos.y + 30) >= (576 - 30)){
+        if ((enemy->pos.y + 30) >= (576 - 30))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
@@ -673,25 +689,29 @@ static void MovementRules(Enemy *enemy)
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           96, 216, 144, 24)){
+                           96, 216, 144, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           576, 144, 144, 24)){
+                           576, 144, 144, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           360, 288, 96, 24)){
+                           360, 288, 96, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
-        if((enemy->pos.y + 30) >= (576 - 30)){
+        if ((enemy->pos.y + 30) >= (576 - 30))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
@@ -704,25 +724,29 @@ static void MovementRules(Enemy *enemy)
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           96, 216, 144, 24)){
+                           96, 216, 144, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           576, 144, 144, 24)){
+                           576, 144, 144, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           360, 288, 96, 24)){
+                           360, 288, 96, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
-        if((enemy->pos.y + 30) >= (576 - 30)){
+        if ((enemy->pos.y + 30) >= (576 - 30))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
@@ -740,7 +764,7 @@ static void MovementRules(Enemy *enemy)
         {
             enemy->dir.x = 0;
             enemy->dir.y = (g_player.pos.y + (72 / 2)) - enemy->pos.y;
-             enemy->dir = Vec2Normalize(&enemy->dir);
+            enemy->dir = Vec2Normalize(&enemy->dir);
             if ((rand() % 60) == 0)
             {
                 enemy->spawn = false;
@@ -787,21 +811,24 @@ static void MovementRules(Enemy *enemy)
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           96, 216, 144, 24)){
+                           96, 216, 144, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           576, 144, 144, 24)){
+                           576, 144, 144, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
         if (CheckCollision(enemy->pos.x, enemy->pos.y,
                            esat::SpriteWidth(*(g_enemy_sprite_list + enemy->sprite)),
                            esat::SpriteHeight(*(g_enemy_sprite_list + enemy->sprite)),
-                           360, 288, 96, 24)){
+                           360, 288, 96, 24))
+        {
             enemy->explode = true;
             enemy->sprite = 0;
         }
@@ -1153,47 +1180,55 @@ static void MovementRules(Enemy *enemy)
 
 static void MoveEnemy(Enemy *enemy)
 {
-    if(!enemy->explode){
+    if (!enemy->explode)
+    {
         MovementRules(enemy);
         enemy->pos.x += enemy->dir.x * enemy->speed;
         enemy->pos.y += enemy->dir.y * enemy->speed;
     }
 }
 
-static void AnimationEnemy(Enemy *enemy){
-    if(!enemy->explode){
+static void AnimationEnemy(Enemy *enemy)
+{
+    if (!enemy->explode)
+    {
         enemy->animation_counter++;
         enemy->animation_counter %= 30;
-        if(enemy->animation_counter == 0){
-            switch(enemy->sprite){
-                case 0:
-                    enemy->sprite = 1;
-                    break;
-                case 1:
-                    enemy->sprite = 0;
-                    break;
-                case 2:
-                    enemy->sprite = 3;
-                    break;
-                case 3:
-                    enemy->sprite = 2;
-                    break;
-                case 4:
-                    enemy->sprite = 5;
-                    break;
-                case 5:
-                    enemy->sprite = 4;
-                    break;
+        if (enemy->animation_counter == 0)
+        {
+            switch (enemy->sprite)
+            {
+            case 0:
+                enemy->sprite = 1;
+                break;
+            case 1:
+                enemy->sprite = 0;
+                break;
+            case 2:
+                enemy->sprite = 3;
+                break;
+            case 3:
+                enemy->sprite = 2;
+                break;
+            case 4:
+                enemy->sprite = 5;
+                break;
+            case 5:
+                enemy->sprite = 4;
+                break;
             }
         }
     }
 }
 
-static void EnemyExplosion(Enemy *enemy){
-    if(enemy->explode){
+static void EnemyExplosion(Enemy *enemy)
+{
+    if (enemy->explode)
+    {
         enemy->explode_counter++;
         enemy->explode_counter %= 15;
-        if(enemy->explode_counter == 0){
+        if (enemy->explode_counter == 0)
+        {
             enemy->sprite++;
         }
     }
@@ -1205,7 +1240,7 @@ void EnemyStart()
     g_last_spawn_time = esat::Time();
     g_enemy_sprite_list = (esat::SpriteHandle *)malloc(sizeof(esat::SpriteHandle) * 13);
     g_explosion_sprite_list = (esat::SpriteHandle *)malloc(sizeof(esat::SpriteHandle) * 3);
-    //g_player.nivel = 0;
+    // g_player.nivel = 0;
     CrearList(&g_enemy_list);
     for (int i = 3; i <= 13; ++i)
     {
@@ -1253,18 +1288,24 @@ void EnemyDraw()
     for (int i = 0; i < ListLength(g_enemy_list); ++i)
     {
         aux_enemy = IndexList(g_enemy_list, i);
-        if(aux_enemy->enem.explode){
-            if(aux_enemy->enem.sprite >= 3){
+        if (aux_enemy->enem.explode)
+        {
+            if (aux_enemy->enem.sprite >= 3)
+            {
                 DelFromList(&g_enemy_list, i);
-            }else{
+            }
+            else
+            {
                 DrawColorSquare({aux_enemy->enem.pos.x, aux_enemy->enem.pos.y}, aux_enemy->enem.color,
                                 esat::SpriteWidth(*(g_explosion_sprite_list + aux_enemy->enem.sprite)),
                                 esat::SpriteHeight(*(g_explosion_sprite_list + aux_enemy->enem.sprite)));
                 esat::DrawSprite(*(g_explosion_sprite_list + aux_enemy->enem.sprite),
-                                aux_enemy->enem.pos.x,
-                                aux_enemy->enem.pos.y); //*(g_explosion_sprite_list + 2)
+                                 aux_enemy->enem.pos.x,
+                                 aux_enemy->enem.pos.y); //*(g_explosion_sprite_list + 2)
             }
-        }else{
+        }
+        else
+        {
             if (aux_enemy->enem.pos.x + 48 > 768 && aux_enemy->enem.dir.x > 0)
             {
                 aux_pos = aux_enemy->enem.pos.x - 768.0f;
@@ -1272,8 +1313,8 @@ void EnemyDraw()
                                 esat::SpriteWidth(*(g_enemy_sprite_list + aux_enemy->enem.sprite)),
                                 esat::SpriteHeight(*(g_enemy_sprite_list + aux_enemy->enem.sprite)));
                 esat::DrawSprite(*(g_enemy_sprite_list + aux_enemy->enem.sprite),
-                                aux_pos,
-                                aux_enemy->enem.pos.y);
+                                 aux_pos,
+                                 aux_enemy->enem.pos.y);
             }
             if (aux_enemy->enem.pos.x < 0)
             {
@@ -1282,15 +1323,15 @@ void EnemyDraw()
                                 esat::SpriteWidth(*(g_enemy_sprite_list + aux_enemy->enem.sprite)),
                                 esat::SpriteHeight(*(g_enemy_sprite_list + aux_enemy->enem.sprite)));
                 esat::DrawSprite(*(g_enemy_sprite_list + aux_enemy->enem.sprite),
-                                aux_pos,
-                                aux_enemy->enem.pos.y);
+                                 aux_pos,
+                                 aux_enemy->enem.pos.y);
             }
             DrawColorSquare({aux_enemy->enem.pos.x, aux_enemy->enem.pos.y}, aux_enemy->enem.color,
                             esat::SpriteWidth(*(g_enemy_sprite_list + aux_enemy->enem.sprite)),
                             esat::SpriteHeight(*(g_enemy_sprite_list + aux_enemy->enem.sprite)));
             esat::DrawSprite(*(g_enemy_sprite_list + aux_enemy->enem.sprite),
-                            aux_enemy->enem.pos.x,
-                            aux_enemy->enem.pos.y);
+                             aux_enemy->enem.pos.x,
+                             aux_enemy->enem.pos.y);
         }
     }
 }
