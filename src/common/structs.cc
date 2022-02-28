@@ -51,7 +51,7 @@ struct Shot
 	int sprite;
 	int frame_counter;
 	int facing_right;
-  int color;
+	int color;
 };
 
 #pragma endregion Enemigos
@@ -95,6 +95,7 @@ struct Jugador
   int score;
   int nivel;
   int contDisp;
+  bool puedeDisp;
 };
 
 #pragma endregion Jugador

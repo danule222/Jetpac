@@ -14,6 +14,8 @@ void InitializeGame()
   StartSound();
   StartPlayerAssets();
   InitSpritesPlayerAssets();
+  InitShots();
+  InitSpritesShots();
   StartScreenCommon();
   StartLoadingScreen();
   StartMenuScreen();
@@ -32,7 +34,7 @@ void FinalizeGame()
   EndPlayer();
   ShipEnd();
   EndSound();
-
+  EndShots();
   esat::SpriteRelease(g_spritesheet);
 }
 

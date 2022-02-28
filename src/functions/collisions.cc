@@ -75,7 +75,17 @@ void CalculateCollision()
      * square or rectangle.
      *
      */
-    // if(esat::MouseButtonDown(0)){
-    //     CollisionEnemyWihtShot(esat::MousePositionX(), esat::MousePositionY(), 1, 1);
-    // }
+// if(esat::MouseButtonDown(0)){
+//     CollisionEnemyWihtShot(esat::MousePositionX(), esat::MousePositionY(), 1, 1);
+// }
+  
+for(int i = 0; i < 5; i++)
+	{
+		if(CollisionEnemyWihtShot((shots + i)->pos.x, (shots + i)->pos.y, 24, 3))
+		{
+			(shots + i)->alive = false;
+			(shots + i)->pos.x = 0;
+			(shots + i)->pos.y = 0;
+		}
+	}
 }
