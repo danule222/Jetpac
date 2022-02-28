@@ -137,15 +137,9 @@ void MoveShots() {
 	}
 }
 
+/*
 void EnemyKill()
 {
-	for(int i = 0; i < 5; i++)
-	{
-		if(CollisionEnemyWihtShot((shots + i)->pos.x, (shots + i)->pos.y, (shots + i)->pos.x + 24, (shots + i)->pos.y + 3))
-		{
-			(shots + i)->alive = false;
-			(shots + i)->pos.x = 0;
-			(shots + i)->pos.y = 0;
-		}
-	}
+
 }
+*/
